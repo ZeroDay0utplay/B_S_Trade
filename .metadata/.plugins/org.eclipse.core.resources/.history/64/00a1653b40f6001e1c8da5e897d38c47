@@ -1,0 +1,26 @@
+package pfa.controllers;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin(origins = "localhost:4200")
+@RestController
+@RequestMapping("/api/")
+public class homeController {
+	@GetMapping
+	private ResponseEntity<String> home() {
+		return new ResponseEntity<>("Hello Mf", HttpStatus.OK);
+	}
+}
+
+class Product {
+	  private long id;
+	  private String name;
+	  private double price;
+
+	  // Getters and setters (omitted for brevity)
+}

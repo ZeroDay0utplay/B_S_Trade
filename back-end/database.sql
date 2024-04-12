@@ -1,0 +1,33 @@
+CREATE DATABASE BSTRADE;
+
+CREATE TABLE User(
+    id SERIAL PRIMARY KEY ,
+    email VARCHAR(50) PRIMARY KEY UNIQUE NOT NULL,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    password VARCHAR(256) NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE Stock(
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(50) PRIMARY KEY
+);
+
+
+CREATE TABLE Starred_Box(
+    id SERIAL PRIMARY KEY,
+    stocks VARCHAR(50) REFERENCES Stock(id)
+);
+
+
+CREATE TABLE Notif(
+    stock VARCHAR(50) NOT NULL,
+    msg VARCHAR5(512) NOT NULL
+);
+
+CREATE TABLE Notifications(
+    id SERIAL PRIMARY KEY,
+    notifs REFERENCES  Notif(stock)
+);

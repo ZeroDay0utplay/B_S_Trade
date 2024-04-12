@@ -1,0 +1,40 @@
+package pfa.controllers;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/")
+public class homeController {
+	@GetMapping
+	private MyResponseObject home() {
+		MyResponseObject responseObject = new MyResponseObject();
+        responseObject.setId(1);
+        responseObject.setName("Example");
+
+        return responseObject;
+	}
+}
+
+class MyResponseObject {
+    private int id;
+    private String name;
+
+    // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
