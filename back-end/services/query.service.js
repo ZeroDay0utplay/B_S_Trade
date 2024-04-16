@@ -4,12 +4,8 @@ class QueryService{
     }
 
     async query(sqlCMD) {
-        try {
-            const result = await this.psqlClient.query(sqlCMD);
-            return result;
-        } catch (error) {
-            return "Query ERROR";
-        }
+        const result = await this.psqlClient.query(sqlCMD);
+        return result;
     }
 }
 

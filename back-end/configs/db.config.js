@@ -1,4 +1,4 @@
-require("dotenv");
+require('dotenv').config();
 
 // const db = {
 //     user: process.env.DB_USER,

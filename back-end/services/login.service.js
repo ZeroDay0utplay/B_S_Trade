@@ -3,13 +3,14 @@ const QueryService = require("./query.service")
 
 async function login(email, password, pool){
     try {
-        const querySerice = new QueryService(pool);
-        const result = await querySerice.query(`SELECT email, pwd FROM users WHERE email=${email} AND pwd=${password};`);
-        if (result == "Query ERROR") return "user not found";
-        return "user logged in successfully";
+        const querySerice = new QueryService(pool).psqlPool;
+        const result = await querySerice.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`);
+        const data = result.rows;
+        console.log(data);
+        if (data.length > 0) return "user logged in successfully";
+        return "user not found";
     } catch (error) {
-        console.log(error);
-        return "internal server error";
+        return "Query ERROR";
     }
 }
 
