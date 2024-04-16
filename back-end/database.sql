@@ -14,7 +14,8 @@ CREATE TABLE users (
     email VARCHAR(50) UNIQUE NOT NULL,
     full_name VARCHAR(50) NOT NULL,
     password VARCHAR(256) NOT NULL,
-    job VARCHAR(50)
+    job VARCHAR(50),
+    is_verified boolean DEFAULT FALSE,
 );
 
 -- Trigger Creation
