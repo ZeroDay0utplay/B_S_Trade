@@ -1,6 +1,9 @@
 const loginService = require("../services/login.service");
-const registerService = require("../services/register.service");
-const generateAccessToken = require("../middlewares/auth.middleware");
+const registerService = require("../services/signup.service");
+const {generateAccessToken} = require("../middlewares/auth.middleware");
+const sendMailService = require("../services/sendMail.service");
+const crypto = require("crypto");
+const QueryService = require("../services/query.service")
 
 
 async function loginController(req, res, next){
@@ -57,13 +60,16 @@ async function registerController(req, res, next){
             case "user added succesfully":
                 statusCode = 201;
                 let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
+                const querySerice = new QueryService(pool).psqlPool;
+                const res = await querySerice.query(`SELECT id FROM users WHERE email = '${email}';`);
+                const id = res.rows[0].id;
                 if (setToken) {
-                    sendMail({
+                    sendMailService.sendMail({
                     from: process.env.EMAIL,
                     to: `${email}`,
                     subject: "Account Verification Link",
-                    text: `Hello, ${fname} ${lname} Please verify your email by clicking this link :
-                            http://${process.env.IP}:${process.env.PORT}/api/users/verify-email/${user._id}/${setToken} `,
+                    text: `Hello, ${full_name} Please verify your email by clicking this link :
+                            http://${process.env.IP}:${process.env.PORT}/api/users/verify-email/${id}/${setToken} `,
                     })
         
                 } else {
