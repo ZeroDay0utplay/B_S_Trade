@@ -12,7 +12,7 @@ async function register(email, password, full_name, job, pool){
         if (data.length > 0) return "User already exists";
         else{
             const hashedPassword = bcrypt.hashSync(password, 10);
-            const addUserQuery = await querySerice.query(`INSERT INTO users (email, password, full_name, job) VALUES ('${email}', '${hashedPassword}', '${full_name}', '${job}');`);
+            await querySerice.query(`INSERT INTO users (email, password, full_name, job) VALUES ('${email}', '${hashedPassword}', '${full_name}', '${job}');`);
             return "user added succesfully";
         }   
     } catch (error) {

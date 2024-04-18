@@ -29,10 +29,10 @@ async function loginController(req, res, next){
             case "Verify your account":
                 res.status(401).json(result);
             case "user not found":
-                res.status.status(404).json(result);
+                res.status(404).json(result);
                 break;
             default:
-                res.status.status(500).json(result);
+                res.status(500).json(result);
                 break;
         }
     } catch (error) {

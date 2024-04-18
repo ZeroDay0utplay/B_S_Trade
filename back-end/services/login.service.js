@@ -1,15 +1,17 @@
 const QueryService = require("./query.service");
+const bcrypt = require("bcryptjs");
 
 
 async function login(email, password, pool){
-    try {
+    // try {
         const querySerice = new QueryService(pool).psqlPool;
         const result = await querySerice.query(`SELECT * FROM users WHERE email = '${email}';`);
         const user = result.rows;
         const id = user[0].id;
+        console.log(id);
         if (user.length > 0){
             const userPassword = user[0].password;
-            const isMatch = await bcrypt.compareSync(password, userPassword);
+            const isMatch = bcrypt.compareSync(password, userPassword);
             if (!isMatch) {
                 return ["Invalid password", id];
             }
@@ -17,9 +19,9 @@ async function login(email, password, pool){
             return ["user logged in successfully", id];
         }
         return ["user not found", id];
-    } catch (error) {
-        return "Query ERROR";
-    }
+    // } catch (error) {
+    //     return "Query ERROR";
+    // }
 }
 
 module.exports = {login};
