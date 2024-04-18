@@ -3,7 +3,7 @@ const QueryService = require("../services/query.service");
 
 
 async function verifyController(req, res, next){
-        console.log(req.params);
+    try {
         const token = (req.params.token).toString();
         const id = req.params.id;
         const pool = req.pool;
@@ -15,9 +15,9 @@ async function verifyController(req, res, next){
         });
 
         const querySerice = new QueryService(pool).psqlPool;
-        const result = await querySerice.query(`SELECT * FROM users WHERE id = '${id}';`);
-        const user = result.rows;
-        if (user.length == 0) {
+        const result = await querySerice.query(`SELECT * FROM users WHERE id = ${id};`);
+        const data = result.rows;
+        if (data.length == 0) {
             return res.status(401).json("We were unable to find a user for this verification. Please SignUp!");
 
         } else if (user.is_verified) {
@@ -26,13 +26,15 @@ async function verifyController(req, res, next){
             .json("User has been already verified. Please Login");
 
         } else {
-            const updated = await querySerice.query(`UPDATE users SET is_verified = TRUE WHERE id = '${id}';`);
+            const updated = await querySerice.query(`UPDATE users SET is_verified = TRUE WHERE id = ${id};`);
             console.log(updated);
             return res
                 .status(200)
                 .json("Your account has been successfully verified");
             }
-
+    } catch (err) {
+        return res.status(500).json("Internal Server Error");
+    }
 }
 
 module.exports = {verifyController};
