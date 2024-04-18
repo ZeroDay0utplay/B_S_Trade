@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const loginRoute = require("./routes/login.route");
+const registerRoute = require("./routes/register.route");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const databaseMiddleware = require("./middlewares/database.middleware");
 
@@ -18,6 +19,7 @@ app.use(cors());
 
 
 app.use("/login", loginRoute);
+app.use("/register", registerRoute);
 
 app.use(errorHandlerMiddleware);
 

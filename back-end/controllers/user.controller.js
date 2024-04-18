@@ -1,4 +1,6 @@
 const loginService = require("../services/login.service");
+const registerService = require("../services/register.service");
+const generateAccessToken = require("../middlewares/auth.middleware");
 
 
 async function loginController(req, res, next){
@@ -39,15 +41,47 @@ async function loginController(req, res, next){
 
 async function registerController(req, res, next){
     try {
+        const pool = req.pool;
         const email = req.body.email;
         const password = req.body.password;
         const full_name = req.body.full_name;
         const job = req.body.job;
-
-    } catch (error) {
+        const registerResult = await registerService.register(email, password, full_name, job, pool);
+        let statusCode = 200;
+        switch (registerResult) {
+            case "Invalid email address":
+                statusCode = 408;
+                break;
+            case "User already exists":
+                statusCode = 411;
+            case "user added succesfully":
+                statusCode = 201;
+                let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
+                if (setToken) {
+                    sendMail({
+                    from: process.env.EMAIL,
+                    to: `${email}`,
+                    subject: "Account Verification Link",
+                    text: `Hello, ${fname} ${lname} Please verify your email by clicking this link :
+                            http://${process.env.IP}:${process.env.PORT}/api/users/verify-email/${user._id}/${setToken} `,
+                    })
         
+                } else {
+                    statusCode = 400;
+                }
+            default:
+                statusCode = 500;
+                break;
+        }
+        res.status(statusCode).json(registerResult);
+    } catch (error) {
+        res.status(500);
+        next(error);
     }
 }
 
 
-module.exports = {loginController};
+module.exports = {
+    loginController,
+    registerController
+};
