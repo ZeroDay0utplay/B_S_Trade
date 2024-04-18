@@ -5,6 +5,7 @@ const loginRoute = require("./routes/login.route");
 const registerRoute = require("./routes/register.route");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const databaseMiddleware = require("./middlewares/database.middleware");
+const verifyRoute = require("./routes/verify.mail.route");
 
 const port = process.env.PORT || 3000;
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+app.use("/users/verify-email", verifyRoute);
 
 app.use(errorHandlerMiddleware);
 

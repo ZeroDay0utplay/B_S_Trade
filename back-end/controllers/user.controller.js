@@ -3,7 +3,7 @@ const registerService = require("../services/signup.service");
 const {generateAccessToken} = require("../middlewares/auth.middleware");
 const sendMailService = require("../services/sendMail.service");
 const crypto = require("crypto");
-const QueryService = require("../services/query.service")
+const QueryService = require("../services/query.service");
 
 
 async function loginController(req, res, next){
@@ -69,7 +69,7 @@ async function registerController(req, res, next){
                     to: `${email}`,
                     subject: "Account Verification Link",
                     text: `Hello, ${full_name} Please verify your email by clicking this link :
-                            http://${process.env.IP}:${process.env.PORT}/api/users/verify-email/${id}/${setToken} `,
+                            http://${process.env.IP}:${process.env.PORT}/users/verify-email/${id}/${setToken} `,
                     })
         
                 } else {
