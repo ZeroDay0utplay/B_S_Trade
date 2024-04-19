@@ -3,11 +3,12 @@ const QueryService = require("./query.service");
 const {generateAccessToken} = require("../../middlewares/auth.middleware");
 const crypto = require("crypto");
 
-async function send_mail(email, full_name, pool){
+async function send_mail(email, pool){
     try {
         const querySerice = new QueryService(pool).psqlPool;
         const res = await querySerice.query(`SELECT id FROM users WHERE email = '${email}';`);
         const id = res.rows[0].id;
+        const full_name = res.rows[0].full_name;
         let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
         if (setToken) {
             sendMailService.sendMail({

@@ -56,7 +56,7 @@ async function registerController(req, res, next){
             case "User already exists":
                 statusCode = 411;
             case "user added succesfully":
-                let sendResponse = await sendVerifMailService.send_mail(email, full_name, pool);
+                let sendResponse = await sendVerifMailService.send_mail(email, pool);
                 statusCode = (sendResponse == "Verification mail has been sent successfully") ? 200: 400;
             default:
                 statusCode = 500;

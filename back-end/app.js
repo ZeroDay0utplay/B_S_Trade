@@ -11,6 +11,7 @@ const verifyRoute = require("./routes/UserRoutes/verify.mail.route");
 const resendRoute = require("./routes/UserRoutes/resendMail.route");
 const resetPWDRoute = require("./routes/UserRoutes/resetPWD.route");
 const sendMFPRoute = require("./routes/UserRoutes/sendMFP.route");
+const resetPwdLinkRoute = require("./routes/UserRoutes/resetPwdLink.route");
 
 
 
@@ -31,7 +32,8 @@ app.use("/register", registerRoute);
 app.use("/users/verify-email", verifyRoute);
 app.use("/resend", resendRoute);
 app.use("/sendMFP", sendMFPRoute);
-app.use("/reset", resetPWDRoute)
+app.use("/reset", resetPWDRoute);
+app.use("/users/reset-pwd", resetPwdLinkRoute);
 
 app.use(errorHandlerMiddleware);
 

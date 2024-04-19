@@ -2,10 +2,11 @@ const sendMailService = require("../sendMail.service");
 const QueryService = require("./query.service");
 
 
-async function send_mail(email, full_name){
+async function send_mail(email){
     const querySerice = new QueryService(pool).psqlPool;
     const res = await querySerice.query(`SELECT id FROM users WHERE email = '${email}';`);
     const id = res.rows[0].id;
+    const full_name = res.rows[0].full_name;
     let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
     if (setToken) {
         sendMailService.sendMail({

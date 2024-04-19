@@ -27,7 +27,8 @@ async function verifyController(req, res, next){
         }
         
     } catch (err) {
-        return res.status(500).json("Internal Server Error");
+        res.status(500).json("Internal Server Error");
+        next(err);
     }
 }
 
