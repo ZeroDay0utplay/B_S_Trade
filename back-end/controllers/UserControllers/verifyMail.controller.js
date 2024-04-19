@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
 const QueryService = require("../../services/UserServices/query.service");
+const checkTokenService = require("../../services/UserServices/checkToken.service");
 
 
 async function verifyController(req, res, next){
@@ -7,16 +7,10 @@ async function verifyController(req, res, next){
         const token = (req.params.token).toString();
         const id = req.params.id;
         const pool = req.pool;
-        let expiredToken = false;
+        let expiredToken = checkTokenService.check(token);
 
-        jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-            if (err !== null && err.name === 'TokenExpiredError'){
-                expiredToken = true;
-                res.status(403).json('Your verification link may have expired. Please click on resend for verify your Email.');
-            }
-        });
-
-        if (expiredToken === true) return;
+        if (expiredToken === true)
+            return res.status(403).json('Your verification link may have expired. Please click on resend for verify your Email.');
     
         const querySerice = new QueryService(pool).psqlPool;
         const result = await querySerice.query(`SELECT * FROM users WHERE id = '${id}';`);

@@ -1,8 +1,6 @@
 const loginService = require("../../services/UserServices/login.service");
 const registerService = require("../../services/UserServices/signup.service");
 const {generateAccessToken} = require("../../middlewares/auth.middleware");
-const crypto = require("crypto");
-const QueryService = require("../../services/UserServices/query.service");
 const sendVerifMailService = require("../../services/UserServices/verifMailSender.service");
 
 

@@ -4,8 +4,7 @@ const QueryService = require("./query.service");
 
 async function register(email, password, full_name, job, pool){
     try {
-        const data = await findUserService.find(email, pool);
-        console.log(data);
+        const data = await findUserService.find(pool, "email", email);
         if (data == "User not found"){
             const hashedPassword = bcrypt.hashSync(password, 10);
             const queryService = new QueryService(pool).psqlPool;
