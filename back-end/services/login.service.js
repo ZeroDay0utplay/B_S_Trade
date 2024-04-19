@@ -8,7 +8,6 @@ async function login(email, password, pool){
         const result = await querySerice.query(`SELECT * FROM users WHERE email = '${email}';`);
         const user = result.rows;
         const id = user[0].id;
-        console.log(id);
         if (user.length > 0){
             const userPassword = user[0].password;
             const isMatch = bcrypt.compareSync(password, userPassword);

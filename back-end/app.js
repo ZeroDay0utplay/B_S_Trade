@@ -24,6 +24,7 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/users/verify-email", verifyRoute);
 app.use("/resend", resendRoute);
+app.use("/sendMFP", resendRoute);
 
 app.use(errorHandlerMiddleware);
 
