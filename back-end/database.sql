@@ -15,7 +15,8 @@ CREATE TABLE users (
     full_name VARCHAR(50) NOT NULL,
     password VARCHAR(256) NOT NULL,
     job VARCHAR(50),
-    is_verified boolean DEFAULT FALSE
+    is_verified boolean DEFAULT FALSE,
+    req_Pwd_Change boolean DEFAULT FALSE
 );
 
 -- Trigger Creation
