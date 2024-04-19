@@ -16,7 +16,7 @@ async function register(email, password, full_name, job, pool){
             return "user added succesfully";
         }   
     } catch (error) {
-        return "Query ERROR";
+        return "Register ERROR";
     }
 
 }

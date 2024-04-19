@@ -22,10 +22,10 @@ async function verifyController(req, res, next){
         const result = await querySerice.query(`SELECT * FROM users WHERE id = '${id}';`);
         const user = result.rows;
         if (user.length == 0) {
-            res.status(401).json("We were unable to find a user for this verification. Please SignUp!");
+            return res.status(401).json("We were unable to find a user for this verification. Please SignUp!");
 
         } else if (user.is_verified) {
-            res.status(200).json("User has been already verified. Please Login");
+            return res.status(200).json("User has been already verified. Please Login");
 
         } else {
             await querySerice.query(`UPDATE users SET is_verified = TRUE WHERE id = '${id}';`);
