@@ -3,7 +3,7 @@ const registerService = require("../services/signup.service");
 const {generateAccessToken} = require("../middlewares/auth.middleware");
 const crypto = require("crypto");
 const QueryService = require("../services/query.service");
-const sendVerifMailService = require("../services/mailSender.service");
+const sendVerifMailService = require("../services/verifMailSender.service");
 
 
 async function loginController(req, res, next){

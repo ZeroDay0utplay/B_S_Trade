@@ -1,5 +1,5 @@
 const sendMailService = require("./sendMail.service");
-const QueryService = require("../services/query.service");
+const QueryService = require("./query.service");
 
 
 async function send_mail(email, full_name){
