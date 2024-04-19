@@ -8,14 +8,14 @@ async function resetPWD(req, res, next){
     try {
         const email = req.body.email;
         const pool = req.body.pool;
-        const data  = findUserService.find(email, pool);
+        const data  = await findUserService.find(email, pool);
         if (data == "User already exists"){
             const hashedPassword = bcrypt.hashSync(req.body.password, 10);
             const querySerice = new QueryService(pool).psqlPool;
             await querySerice.query(`UPDATE users SET password = ${hashedPassword} WHERE email = ${email};`);
-            
+            res.status(200).json('Password has been successfully updated');
         }
-        return data;
+        return res.status(400).json(data);
     } catch (error) {
         res.status(500);
         next(error);

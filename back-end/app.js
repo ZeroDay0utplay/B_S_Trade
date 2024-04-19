@@ -1,13 +1,17 @@
 const express = require("express");
+
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const loginRoute = require("./routes/UserRoutes/login.route");
-const registerRoute = require("./routes/UserRoutes/register.route");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const databaseMiddleware = require("./middlewares/database.middleware");
+
+const loginRoute = require("./routes/UserRoutes/login.route");
+const registerRoute = require("./routes/UserRoutes/register.route");
 const verifyRoute = require("./routes/UserRoutes/verify.mail.route");
 const resendRoute = require("./routes/UserRoutes/resendMail.route");
-const resetPWDRoute = require("./routes/resetPWD.route");
+const resetPWDRoute = require("./routes/UserRoutes/resetPWD.route");
+
+
 
 const port = process.env.PORT || 3000;
 
