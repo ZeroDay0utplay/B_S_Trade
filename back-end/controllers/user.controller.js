@@ -3,7 +3,7 @@ const registerService = require("../services/signup.service");
 const {generateAccessToken} = require("../middlewares/auth.middleware");
 const crypto = require("crypto");
 const QueryService = require("../services/query.service");
-const sendVerifMailService = require("../services/sendVerifMail.service");
+const sendVerifMailService = require("../services/mailSender.service");
 
 
 async function loginController(req, res, next){
@@ -58,12 +58,8 @@ async function registerController(req, res, next){
             case "User already exists":
                 statusCode = 411;
             case "user added succesfully":
-                statusCode = 201;
-                let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
-                const querySerice = new QueryService(pool).psqlPool;
-                const res = await querySerice.query(`SELECT id FROM users WHERE email = '${email}';`);
-                const id = res.rows[0].id;
-                statusCode = sendVerifMailService.send_mail(email, full_name, id, setToken);
+                let sendResponse = sendVerifMailService.send_mail(email, full_name);
+                statusCode = (sendResponse == "Verification mail has been sent successfully") ? 200: 400;
             default:
                 statusCode = 500;
                 break;
