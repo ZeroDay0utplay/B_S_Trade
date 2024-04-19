@@ -12,6 +12,7 @@ const resendRoute = require("./routes/UserRoutes/resendMail.route");
 const resetPWDRoute = require("./routes/UserRoutes/resetPWD.route");
 const sendMFPRoute = require("./routes/UserRoutes/sendMFP.route");
 const resetPwdLinkRoute = require("./routes/UserRoutes/resetPwdLink.route");
+const updateProfileRoute = require("./routes/ProfileRoutes/updateProfile.route");
 
 
 
@@ -34,6 +35,8 @@ app.use("/resend", resendRoute);
 app.use("/sendMFP", sendMFPRoute);
 app.use("/reset", resetPWDRoute);
 app.use("/users/reset-pwd", resetPwdLinkRoute);
+
+app.use("/profile", updateProfileRoute);
 
 app.use(errorHandlerMiddleware);
 
