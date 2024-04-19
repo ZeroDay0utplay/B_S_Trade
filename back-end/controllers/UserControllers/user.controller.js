@@ -1,9 +1,9 @@
-const loginService = require("../services/login.service");
-const registerService = require("../services/signup.service");
-const {generateAccessToken} = require("../middlewares/auth.middleware");
+const loginService = require("../../services/UserServices/login.service");
+const registerService = require("../../services/UserServices/signup.service");
+const {generateAccessToken} = require("../../middlewares/auth.middleware");
 const crypto = require("crypto");
-const QueryService = require("../services/query.service");
-const sendVerifMailService = require("../services/verifMailSender.service");
+const QueryService = require("../../services/UserServices/query.service");
+const sendVerifMailService = require("../../services/UserServices/verifMailSender.service");
 
 
 async function loginController(req, res, next){

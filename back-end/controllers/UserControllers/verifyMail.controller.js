@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const QueryService = require("../services/query.service");
+const QueryService = require("../../services/UserServices/query.service");
 
 
 async function verifyController(req, res, next){

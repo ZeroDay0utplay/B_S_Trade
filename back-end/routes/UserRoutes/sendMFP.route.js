@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sendPWDController = require("../controllers/sendMFP");
+const sendPWDController = require("../../controllers/UserControllers/sendMFP");
 
 
 

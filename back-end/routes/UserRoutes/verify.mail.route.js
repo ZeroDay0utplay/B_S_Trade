@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const verifyMailController = require("../controllers/verify.mail.controller");
+const verifyMailController = require("../../controllers/UserControllers/verifyMail.controller");
 
 
 

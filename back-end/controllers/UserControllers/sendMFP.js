@@ -1,4 +1,4 @@
-const verifMailSenderService = require("../services/verifMailSender.service");
+const verifMailSenderService = require("../../services/verifMailSender.service");
 
 
 

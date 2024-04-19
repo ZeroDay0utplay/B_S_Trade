@@ -3,7 +3,7 @@ const findUserService = require("./findUser.service")
 
 async function register(email, password, full_name, job, pool){
     try {
-        const data = findUserService.find();
+        const data = findUserService.find(email, pool);
         if (data == "User not found"){
             const hashedPassword = bcrypt.hashSync(password, 10);
             await querySerice.query(`INSERT INTO users (email, password, full_name, job) VALUES ('${email}', '${hashedPassword}', '${full_name}', '${job}');`);

@@ -1,4 +1,4 @@
-const sendMailService = require("./sendMail.service");
+const sendMailService = require("../sendMail.service");
 const QueryService = require("./query.service");
 
 

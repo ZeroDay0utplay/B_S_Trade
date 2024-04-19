@@ -3,7 +3,7 @@ const validator = require("validator")
 
 
 
-async function find(email){
+async function find(email, pool){
     try {
         if (!(validator.isEmail(email)))
             return "Invalid email address";
