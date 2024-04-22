@@ -4,7 +4,7 @@ const verifyMailController = require("../../controllers/UserControllers/verifyMa
 
 
 
-router.get("/:id/:token", verifyMailController.verifyController);
+router.get("/:user_id/:token", verifyMailController.verifyController);
 
 
 module.exports = router;

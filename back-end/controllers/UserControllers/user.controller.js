@@ -10,14 +10,14 @@ async function loginController(req, res, next){
         const password = req.body.password;
         const pool = req.pool;
         const loginResult = await loginService.login(email, password, pool);
-        const id = loginResult[1];
+        const user_id = loginResult[1];
         const result = loginResult[0];
         switch (result) {
             case "user logged in successfully":
                 // Auth
-                const token = generateAccessToken(id.toString(), 90);
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).json({ auth_token: token, result: result });
+                const token = generateAccessToken(user_id.toString(), 90);
+                res.cookie('jwtToken', token, { httpOnly: true });
+                res.status(200).json(result);
                 break;
             case "Invalid password":
                 res.status(401).json(result);

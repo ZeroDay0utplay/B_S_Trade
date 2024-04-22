@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const findUserService = require("../../services/UserServices/findUser.service");
 const QueryService = require("../../services/UserServices/query.service");
-const updateService = require("../../services/UserServices/update.service")
+const updateService = require("../../services/UserServices/update.service");
+const { getData } = require("../../services/UserServices/getData.service");
 
 
 
@@ -12,9 +13,8 @@ async function resetPWD(req, res, next){
         const data  = await findUserService.find(pool, "email", email);
         if (data == "User already exists"){
             const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-            const querySerice = new QueryService(pool).psqlPool;
-            const query = await querySerice.query(`SELECT req_pwd_change FROM users WHERE email = '${email}';`);
-            const reqPwdChange = query.rows[0].req_pwd_change;
+            const data = await getData(pool, "email", email);
+            const reqPwdChange = data[0].req_pwd_change;
             if (reqPwdChange){
                 await updateService.update(pool, "passowrd", hashedPassword, "email", email);
                 await updateService.update(pool, "req_pwd_change", "FALSE", "email", email);

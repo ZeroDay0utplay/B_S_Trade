@@ -7,12 +7,4 @@ const db = {
     port: process.env.DB_PORT || 5432
 };
 
-// const db = {
-//     user: "postgres",
-//     password: "zdo4tw",
-//     host: "localhost",
-//     port: 5432
-// }
-
-
 module.exports = db;

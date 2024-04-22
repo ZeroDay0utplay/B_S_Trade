@@ -3,7 +3,7 @@ const router = express.Router();
 const resetPwdLinkController = require("../../controllers/UserControllers/resetPwdLink.controller");
 
 
-router.get("/:id/:token", resetPwdLinkController.check_clicked_link);
+router.get("/:user_id/:token", resetPwdLinkController.check_clicked_link);
 
 
 module.exports = router;

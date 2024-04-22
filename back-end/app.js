@@ -13,6 +13,7 @@ const resetPWDRoute = require("./routes/UserRoutes/resetPWD.route");
 const sendMFPRoute = require("./routes/UserRoutes/sendMFP.route");
 const resetPwdLinkRoute = require("./routes/UserRoutes/resetPwdLink.route");
 const updateProfileRoute = require("./routes/ProfileRoutes/updateProfile.route");
+const rootRoute = require("./routes/root.route");
 
 
 
@@ -27,6 +28,7 @@ app.use(databaseMiddleware);
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use("/", rootRoute);
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);

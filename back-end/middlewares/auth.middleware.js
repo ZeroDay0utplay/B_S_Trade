@@ -21,9 +21,9 @@ function authorization(req, res, next) {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         if (err) {
             if (err.name === 'TokenExpiredError') {
-                return res.status(403).json({ message: 'Access token has expired' });
+                return res.status(403).json('Access token has expired');
             } else {
-                return res.status(403).json({ message: 'Access token is invalid' });
+                return res.status(403).json('Access token is invalid');
             }
         }
         req.user = user;

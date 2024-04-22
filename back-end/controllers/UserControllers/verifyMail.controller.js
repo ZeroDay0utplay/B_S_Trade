@@ -1,20 +1,19 @@
-const QueryService = require("../../services/UserServices/query.service");
 const checkTokenService = require("../../services/UserServices/checkToken.service");
+const { getData } = require("../../services/UserServices/getData.service");
+const { update } = require("../../services/UserServices/update.service");
 
 
 async function verifyController(req, res, next){
     try {
         const token = (req.params.token).toString();
-        const id = req.params.id;
+        const user_id = req.params.user_id;
         const pool = req.pool;
         let expiredToken = checkTokenService.check(token);
 
         if (expiredToken === true)
             return res.status(403).json('Your verification link may have expired. Please click on resend for verify your Email.');
     
-        const querySerice = new QueryService(pool).psqlPool;
-        const result = await querySerice.query(`SELECT * FROM users WHERE id = '${id}';`);
-        const user = result.rows;
+        const user = await getData(pool, "user_id", user_id);
         if (user.length == 0) {
             return res.status(401).json("We were unable to find a user for this verification. Please SignUp!");
 
@@ -22,7 +21,7 @@ async function verifyController(req, res, next){
             return res.status(200).json("User has been already verified. Please Login");
 
         } else {
-            await querySerice.query(`UPDATE users SET is_verified = TRUE WHERE id = '${id}';`);
+            await update(pool, "is_verified", "TRUE", "user_id", user_id);
             return res.status(200).json("Your account has been successfully verified");
         }
         
