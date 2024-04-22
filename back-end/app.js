@@ -5,15 +5,9 @@ const cors = require("cors");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const databaseMiddleware = require("./middlewares/database.middleware");
 
-const loginRoute = require("./routes/UserRoutes/login.route");
-const registerRoute = require("./routes/UserRoutes/register.route");
-const verifyRoute = require("./routes/UserRoutes/verify.mail.route");
-const resendRoute = require("./routes/UserRoutes/resendMail.route");
-const resetPWDRoute = require("./routes/UserRoutes/resetPWD.route");
-const sendMFPRoute = require("./routes/UserRoutes/sendMFP.route");
-const resetPwdLinkRoute = require("./routes/UserRoutes/resetPwdLink.route");
-const updateProfileRoute = require("./routes/ProfileRoutes/updateProfile.route");
+const userRoutes = require("./routes/user.routes");
 const rootRoute = require("./routes/root.route");
+const profileRoutes = require("./routes/profile.routes");
 
 
 
@@ -27,22 +21,16 @@ const app = express();
 app.use(databaseMiddleware);
 app.use(bodyParser.json());
 app.use(cors());
-
-app.use("/", rootRoute);
-
-app.use("/login", loginRoute);
-app.use("/register", registerRoute);
-app.use("/users/verify-email", verifyRoute);
-app.use("/resend", resendRoute);
-app.use("/sendMFP", sendMFPRoute);
-app.use("/reset", resetPWDRoute);
-app.use("/users/reset-pwd", resetPwdLinkRoute);
-
-app.use("/profile", updateProfileRoute);
-
 app.use(errorHandlerMiddleware);
 
 
+// Routes
+rootRoute(app);
+userRoutes(app);
+profileRoutes(app);
+
+
+// server
 app.listen(port, () => {
     console.log(`[+] Listening on port ${port}`);
 })
