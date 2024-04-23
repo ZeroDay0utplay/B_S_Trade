@@ -16,7 +16,7 @@ async function resetPWD(req, res, next){
             const data = await getData(pool, "email", email);
             const reqPwdChange = data[0].req_pwd_change;
             if (reqPwdChange == true){
-                await updateService.update(pool, "passowrd", hashedPassword, "email", email);
+                await updateService.update(pool, "password", hashedPassword, "email", email);
                 await updateService.update(pool, "req_pwd_change", "FALSE", "email", email);
                 return res.status(200).json({message: 'Password has been successfully updated'});
             } 
