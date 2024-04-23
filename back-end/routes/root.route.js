@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 const rootRoute = (app) => {
-    router.get('/:id', getController);
+    router.get('/', getController);
     app.use(router);
 }
 
