@@ -6,7 +6,7 @@ async function getController(req, res, next){
         const id = req.params.id;
         const pool = req.pool;
         const data = await getData(pool, "user_id", id);
-        console.log(data);
+        //console.log(data);
     } catch (error) {
         res.status(500).json(error);
         next(error);

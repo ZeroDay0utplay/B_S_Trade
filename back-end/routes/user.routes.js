@@ -17,7 +17,7 @@ let userRoutes = (app) => {
   router.post("/register", registerController.register);
   router.post("/resend", resendMailController.resend);
   router.post("/reset", sendPWDController.resetPWD);
-  router.get("/users/reset-pwd", resetPwdLinkController.check_clicked_link);
+  router.get("/users/reset-pwd/:user_id/:token", resetPwdLinkController.check_clicked_link);
   router.post("/sendMFP", sendMFPController.send);
   router.get("/users/verify-email/:user_id/:token", verifyMailController.verifyController);
   router.get("/logout", logoutController.logout);
