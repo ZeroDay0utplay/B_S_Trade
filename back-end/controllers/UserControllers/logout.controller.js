@@ -1,3 +1,5 @@
+
+
 async function logout(req, res, next){
     try {
         res.clearCookie("access_token");

@@ -14,12 +14,12 @@ async function resetPWD(req, res, next){
             const hashedPassword = bcrypt.hashSync(req.body.password, 10);
             const data = await getData(pool, "email", email);
             const reqPwdChange = data[0].req_pwd_change;
-            if (reqPwdChange){
+            if (reqPwdChange == true){
                 await updateService.update(pool, "passowrd", hashedPassword, "email", email);
                 await updateService.update(pool, "req_pwd_change", "FALSE", "email", email);
-                return res.status(200).json('Password has been successfully updated');
+                return res.status(200).json({message: 'Password has been successfully updated'});
             } 
-            return res.status(200).json('Please click on the link that has been sent to your mail');
+            return res.status(200).json({message: 'Please click on the link that has been sent to your mail'});
         }
         return res.status(400).json({message: data});
     } catch (error) {

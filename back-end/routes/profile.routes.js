@@ -5,7 +5,7 @@ const { authorization } = require("../middlewares/auth.middleware");
 
 
 let profileRoutes = (app) => {
-    router.post("/profile/:id", authorization, updateProfileController.updateProfile);
+    router.post("/profile/:user_id", authorization, updateProfileController.updateProfile);
     app.use(router);
 }
 
