@@ -1,6 +1,6 @@
 const checkTokenService = require("../../services/UserServices/checkToken.service");
-const { getData } = require("../../services/UserServices/getData.service");
-const { update } = require("../../services/UserServices/update.service");
+const { getData } = require("../../services/DB_Services/getData.service");
+const { update } = require("../../services/DB_Services/update.service");
 
 
 async function verifyController(req, res, next){

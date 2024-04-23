@@ -1,10 +1,9 @@
-const QueryService = require("./query.service");
+const { getData } = require("../DB_Services/getData.service");
 
 
-async function find(pool, property, value, table='users'){
+async function find(pool, property, value){
     try {
-        const queryService = new QueryService(pool).psqlPool;
-        const result = await queryService.query(`SELECT * FROM ${table} WHERE ${property} = '${value}';`);
+        const result = await getData(pool, property, value, 'users');
         const user = result.rows;
         if (user.length > 0) return "User already exists";
         return "User not found";

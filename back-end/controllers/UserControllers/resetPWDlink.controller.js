@@ -1,6 +1,6 @@
 const findUserService = require("../../services/UserServices/findUser.service");
 const checkTokenService = require("../../services/UserServices/checkToken.service");
-const updateService = require("../../services/UserServices/update.service")
+const updateService = require("../../services/DB_Services/update.service")
 
 
 async function check_clicked_link (req, res, next) {

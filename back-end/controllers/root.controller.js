@@ -1,4 +1,4 @@
-const { getData } = require("../services/UserServices/getData.service");
+const { getData } = require("../services/DB_Services/getData.service");
 
 
 async function getController(req, res, next){

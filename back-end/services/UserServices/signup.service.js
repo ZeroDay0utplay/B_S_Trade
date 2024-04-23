@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const findUserService = require("./findUser.service");
-const QueryService = require("./query.service");
+const QueryService = require("../DB_Services/query.service");
+const { insert } = require("../DB_Services/insert.service");
 
 async function register(email, password, full_name, job, pool, table='users'){
     try {

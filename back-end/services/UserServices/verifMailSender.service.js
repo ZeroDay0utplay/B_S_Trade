@@ -1,5 +1,5 @@
 const sendMailService = require("./sendMail.service");
-const QueryService = require("./query.service");
+const QueryService = require("../DB_Services/query.service");
 const {generateAccessToken} = require("../../middlewares/auth.middleware");
 const crypto = require("crypto");
 

@@ -1,12 +1,10 @@
-const QueryService = require("./query.service");
+const { getData } = require("../DB_Services/getData.service");
 const bcrypt = require("bcryptjs");
 
 
-async function login(email, password, pool, table='users'){
+async function login(email, password, pool){
     try {
-        const querySerice = new QueryService(pool).psqlPool;
-        const result = await querySerice.query(`SELECT * FROM ${table} WHERE email = '${email}';`);
-        const user = result.rows;
+        const user = await getData(pool, "email", email, "users");
         const user_id = user[0].user_id;
         if (user.length > 0){
             const userPassword = user[0].password;

@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const findUserService = require("../../services/UserServices/findUser.service");
-const updateService = require("../../services/UserServices/update.service");
-const { getData } = require("../../services/UserServices/getData.service");
+const updateService = require("../../services/DB_Services/update.service");
+const { getData } = require("../../services/DB_Services/getData.service");
 
 
 

@@ -1,12 +1,15 @@
-const updateService = require("../../services/UserServices/update.service");
+const updateService = require("../../services/DB_Services/update.service");
+const uploadFile = require("../../middlewares/upload.middleware");
 
 
 
 async function updateProfile(req, res, next){
     try {
+        await uploadFile(req, res);
         const pool = req.pool;
-        const update = req.body;
         const user_id = req.params.user_id;
+        const file = req.file;
+        console.log(file);
         for (let prop in update){
             let value = update[prop];
             if (value != ''){

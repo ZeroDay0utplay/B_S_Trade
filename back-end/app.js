@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+global.__basedir = __dirname;
 
 // middlewares
 // inject psql Pool into request for a goal of single connection to DB
