@@ -1,7 +1,8 @@
 const express = require("express");
-
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const databaseMiddleware = require("./middlewares/database.middleware");
 
@@ -23,6 +24,7 @@ app.use(databaseMiddleware);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(errorHandlerMiddleware);
+app.use(cookieParser());
 
 
 // Routes

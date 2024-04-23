@@ -21,7 +21,7 @@ async function resetPWD(req, res, next){
             } 
             return res.status(200).json('Please click on the link that has been sent to your mail');
         }
-        return res.status(400).json(data);
+        return res.status(400).json({message: data});
     } catch (error) {
         res.status(500);
         next(error);

@@ -13,7 +13,8 @@ function generateAccessToken(userId, duration) {
 
 
 function authorization(req, res, next) {
-    const token = req.body.auth_token;
+    const token = req.cookies.auth_token;
+    console.log(token);
     if (token == null) {
         return res.sendStatus(401);
     }

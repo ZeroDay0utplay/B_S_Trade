@@ -9,7 +9,10 @@ async function updateProfile(req, res, next){
         const pool = req.pool;
         const user_id = req.params.user_id;
         const file = req.file;
-        console.log(file);
+        if (file != undefined){
+            
+        }
+        const update = req.body;
         for (let prop in update){
             let value = update[prop];
             if (value != ''){

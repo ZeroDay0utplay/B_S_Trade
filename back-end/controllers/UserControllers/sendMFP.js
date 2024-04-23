@@ -8,7 +8,7 @@ async function send(req, res, next){
         const pool = req.pool;
         let verifRESP = await verifMailSenderService.send_mail(pool, email);
         let statusCode = (verifRESP == "Password link has been sent successfully") ? 200: 400;
-        res.status(statusCode).json(verifRESP);
+        res.status(statusCode).json({message: verifRESP});
     } catch (error) {
         res.status(500);
         next(error);

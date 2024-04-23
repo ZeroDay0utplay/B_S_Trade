@@ -7,6 +7,7 @@ const resetPwdLinkController = require("../controllers/UserControllers/resetPwdL
 const sendMFPController = require("../controllers/UserControllers/sendMFP");
 const verifyMailController = require("../controllers/UserControllers/verifyMail.controller");
 const sendPWDController = require("../controllers/UserControllers/resetPWD.controller");
+const { logout } = require("../controllers/UserControllers/logout.controller");
 
 
 
@@ -18,6 +19,7 @@ let userRoutes = (app) => {
   router.get("/users/reset-pwd", resetPwdLinkController.check_clicked_link);
   router.post("/sendMFP", sendMFPController.send);
   router.get("/users/verify-email/:user_id/:token", verifyMailController.verifyController);
+  router.get("/logout", logout);
   app.use(router);
 };
 

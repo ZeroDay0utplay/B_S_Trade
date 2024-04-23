@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const updateProfileController = require("../controllers/ProfileControllers/updateProfile.controller");
+const { authorization } = require("../middlewares/auth.middleware");
 
 
 let profileRoutes = (app) => {
-    router.post("/profile/:id", updateProfileController.updateProfile);
+    router.post("/profile/:id", authorization, updateProfileController.updateProfile);
     app.use(router);
 }
 

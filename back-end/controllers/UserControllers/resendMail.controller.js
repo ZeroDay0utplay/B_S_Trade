@@ -7,7 +7,7 @@ async function resend(req, res, next){
         const email = req.body.email;
         let verifRESP = await verifMailSenderService.send_mail(email);
         let statusCode = (verifRESP == "Verification mail has been sent successfully") ? 200: 400;
-        res.status(statusCode).json(verifRESP);
+        res.status(statusCode).json({message: verifRESP});
     } catch (error) {
         res.status(500);
         next(error);

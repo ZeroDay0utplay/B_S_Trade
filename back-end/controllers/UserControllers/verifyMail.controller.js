@@ -11,22 +11,22 @@ async function verifyController(req, res, next){
         let expiredToken = checkTokenService.check(token);
 
         if (expiredToken === true)
-            return res.status(403).json('Your verification link may have expired. Please click on resend for verify your Email.');
+            return res.status(403).json({message: 'Your verification link may have expired. Please click on resend for verify your Email.'});
     
         const user = await getData(pool, "user_id", user_id);
         if (user.length == 0) {
-            return res.status(401).json("We were unable to find a user for this verification. Please SignUp!");
+            return res.status(401).json({message: "We were unable to find a user for this verification. Please SignUp!"});
 
         } else if (user.is_verified) {
-            return res.status(200).json("User has been already verified. Please Login");
+            return res.status(200).json({message: "User has been already verified. Please Login"});
 
         } else {
             await update(pool, "is_verified", "TRUE", "user_id", user_id);
-            return res.status(200).json("Your account has been successfully verified");
+            return res.status(200).json({message: "Your account has been successfully verified"});
         }
         
     } catch (err) {
-        res.status(500).json("Internal Server Error");
+        res.status(500);
         next(err);
     }
 }

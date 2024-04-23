@@ -12,27 +12,26 @@ async function loginController(req, res, next){
         const loginResult = await loginService.login(email, password, pool);
         const user_id = loginResult[1];
         const result = loginResult[0];
+        let statusCode = 200;
         switch (result) {
             case "user logged in successfully":
-                // Auth
+                // send jwt
                 const token = generateAccessToken(user_id.toString(), 90);
-                res.cookie('jwtToken', token, { httpOnly: true });
-                res.status(200).json(result);
+                res.cookie('auth_token', token, { httpOnly: true });
                 break;
             case "Invalid password":
-                res.status(401).json(result);
+                statusCode = 401;
                 break;
             case "Verify your account":
-                res.status(401).json(result);
-            case "Verify your account":
-                res.status(401).json(result);
+                statusCode = 401;
             case "user not found":
-                res.status(404).json(result);
+                statusCode = 404;
                 break;
             default:
-                res.status(500).json(result);
+                statusCode = 500;
                 break;
         }
+        res.status(statusCode).json({message: result});
     } catch (error) {
         res.status(500);
         next(error);
