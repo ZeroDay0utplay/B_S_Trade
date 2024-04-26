@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.landing-logo img{
+    width: 53px;
+    height: 43px;
+}
+
+nav{
+    font-weight: bold;
+}
+
+.landing-logo a{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.navbar-nav.ml-auto {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}

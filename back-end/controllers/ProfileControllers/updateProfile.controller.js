@@ -1,8 +1,6 @@
 const updateService = require("../../services/DB_Services/update.service");
 const uploadFile = require("../../middlewares/upload.middleware");
 const { readImage } = require("../../services/ProfileServices/read_image.service");
-const fs = require("fs");
-const QueryService = require("../../services/DB_Services/query.service");
 
 
 

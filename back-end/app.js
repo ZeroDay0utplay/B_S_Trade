@@ -9,6 +9,7 @@ const databaseMiddleware = require("./middlewares/database.middleware");
 const userRoutes = require("./routes/user.routes");
 const rootRoute = require("./routes/root.route");
 const profileRoutes = require("./routes/profile.routes");
+const stocksRoute = require("./routes/stocks.routes");
 
 
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 rootRoute(app);
 userRoutes(app);
 profileRoutes(app);
+stocksRoute(app);
 
 
 // server
