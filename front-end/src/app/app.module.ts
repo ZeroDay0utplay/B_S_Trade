@@ -8,6 +8,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { IntroComponent } from './intro/intro.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { RegisterComponent } from './register/register.component';
     NavBarComponent,
     SearchBarComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    IntroComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

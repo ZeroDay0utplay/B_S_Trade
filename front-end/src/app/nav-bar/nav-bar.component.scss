@@ -19,3 +19,20 @@ nav{
     display: flex;
     align-items: center; /* Align items vertically */
 }
+
+.btn-outline-primary{
+    color: black;
+}
+
+.btn-outline-primary:hover {
+    background-color: black; /* Change hover background color to red */
+    border-color: white; /* Change border color to red */
+    color: white; /* Change text color to white */
+}
+
+.dropdown-toggle::after {
+    display: none; /* Hide the arrow */
+}
+
+  
+
