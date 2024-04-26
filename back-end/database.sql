@@ -24,16 +24,16 @@ BEFORE INSERT ON users
 FOR EACH ROW EXECUTE FUNCTION generate_hashed_id();
 
 
-CREATE TABLE stock (
+CREATE TABLE stocks (
     stock_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    stock_ids INT[] NOT NULL, 
+    stock_name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE stock_data (
     stock_data_id SERIAL PRIMARY KEY,
-    datetime_column DATE
-    price DECIMAL(10, 2) NOT NULL
+    datetime_column DATE,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_id INT REFERENCES stock(stock_id)
 );
 
 CREATE TABLE starred_box(
@@ -51,5 +51,5 @@ CREATE TABLE notif(
 
 CREATE TABLE notifications(
     notifications_id SERIAL PRIMARY KEY,
-    notifs REFERENCES  Notif(stock)
+    notifs REFERENCES Notif(stock)
 );

@@ -9,7 +9,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { IntroComponent } from './intro/intro.component';
-import { FilterPipe } from './pipes/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,13 @@ import { FilterPipe } from './pipes/filter.pipe';
     SearchBarComponent,
     HomeComponent,
     RegisterComponent,
-    IntroComponent,
-    FilterPipe
+    IntroComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
