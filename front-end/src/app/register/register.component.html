@@ -1,1 +1,39 @@
-<p>register works!</p>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 40px; flex-direction: column;">
+    <div class="landing-logo">
+        <img src="../../assets/images/logo.png" alt="">
+        <a class="navbar-brand bstrade-logo-phrase" href="#">B&S Trade</a>
+    </div>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
+        <mat-form-field>
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="full_name">
+        </mat-form-field>
+      
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Job</mat-label>
+            <input matInput formControlName="job">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm your password</mat-label>
+            <input matInput [type]="hideConf ? 'password' : 'text'" formControlName="confirm_password">
+            <button type="button" mat-icon-button matSuffix (click)="hideConf = !hideConf" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hideConf ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>   
+      
+        <button class="sub-btn" mat-raised-button type="submit">Register</button>
+    </form>
+</div>

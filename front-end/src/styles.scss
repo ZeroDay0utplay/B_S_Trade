@@ -2,3 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0;}
+
+
+.user-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.landing-logo a{
+    font-family: 'Montserrat';
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 25px;
+}
