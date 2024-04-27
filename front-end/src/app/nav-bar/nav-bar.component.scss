@@ -9,10 +9,11 @@ nav{
 }
 
 .landing-logo a{
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat';
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
+    font-size: 25px;
 }
 
 .navbar-nav.ml-auto {
@@ -34,5 +35,8 @@ nav{
     display: none; /* Hide the arrow */
 }
 
+.nav-item{
+    font-size: 20px;
+}
   
 
