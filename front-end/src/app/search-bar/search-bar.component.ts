@@ -1,27 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { GetDataService } from '../services/get-data.service';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, startWith } from 'rxjs';
+import { Stock } from './stocks';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit {
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions!: Observable<string[]>;
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+
+export class SearchBarComponent implements OnInit{
+  stocks: Stock[] = [];
+  filteroptions!: Observable<Stock[]>
+  formcontrol = new FormControl('');
+
+  constructor(private getStockService: GetDataService){
+    this.getStockService.getData().subscribe({
+      next: (stocks) => {
+        this.stocks = stocks;
+      }
+    })
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  ngOnInit(){
+    this.filteroptions = this.formcontrol.valueChanges.pipe(
+      startWith(''), map(value => this._LISTFILTER(value || ''))
+    )
+  }
+
+  private _LISTFILTER(value: string): Stock[] {
+    const searchvalue = value.toLocaleLowerCase();
+    return this.stocks.filter(option => option.stock_name.toLocaleLowerCase().includes(searchvalue));
   }
 }
