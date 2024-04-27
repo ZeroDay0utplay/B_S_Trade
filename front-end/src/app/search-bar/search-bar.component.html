@@ -7,7 +7,9 @@
       <mat-form-field class="example-full-width" appearance="fill">
           <input class="input-no-underline" matInput [matAutocomplete]="auto" [formControl]="formcontrol" placeholder="Search" />
           <mat-autocomplete #auto>
-              <mat-option *ngFor="let item of filteroptions | async">{{item.stock_name}}</mat-option>
+              <mat-option routerLink="stocks/{{item.stock_id}}" *ngFor="let item of filteroptions | async">
+                {{item.stock_name}}
+              </mat-option>
           </mat-autocomplete>
       </mat-form-field>
   </form>

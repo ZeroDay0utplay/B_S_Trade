@@ -32,4 +32,10 @@
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled, ::ng-deep .mat-form-field-outline {
     opacity: 0;
 }
+
+.no-border-bg {
+    border: none;
+    background-color: transparent;
+}
+
   
