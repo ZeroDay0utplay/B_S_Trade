@@ -5,21 +5,24 @@ const sendVerifMailService = require("../../services/UserServices/verifMailSende
 async function register(req, res, next){
     try {
         const pool = req.pool;
+        console.log(req.body);
         const email = req.body.email;
         const password = req.body.password;
         const full_name = req.body.full_name;
         const job = req.body.job;
         const registerResult = await registerService.register(email, password, full_name, job, pool);
-        let statusCode = 200;
+        let statusCode = 201;
         switch (registerResult) {
             case "Invalid email address":
                 statusCode = 408;
                 break;
             case "User already exists":
                 statusCode = 411;
+                break;
             case "user added succesfully":
                 let sendResponse = await sendVerifMailService.send_mail(email, pool);
                 statusCode = (sendResponse == "Verification mail has been sent successfully") ? 200: 400;
+                break;
             default:
                 statusCode = 500;
                 break;

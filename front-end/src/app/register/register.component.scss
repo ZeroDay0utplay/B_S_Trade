@@ -19,3 +19,13 @@ mat-form-field{
 .landing-logo img{
     width: 70px;
 }
+
+.mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 30px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper{
+    background-color: white !important;
+    height: 55px !important;
+    border-radius: 0px !important;
+}

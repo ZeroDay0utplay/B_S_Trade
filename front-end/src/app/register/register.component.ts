@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PostDataService } from '../services/post-data.service';
+import { User } from '../Interfaces/user';
+
 
 @Component({
   selector: 'app-register',
@@ -16,7 +19,27 @@ export class RegisterComponent {
   });
   hide = true;
   hideConf = true;
+  modal = "";
+
+  constructor(private postDataService: PostDataService){}
+
   onSubmit() {
-    console.log(this.registrationForm.value);
-  }  
+    if (this.registrationForm.valid){
+      delete this.registrationForm.value.confirm_password;
+      const body: User = this.registrationForm.value as User;
+      this.postDataService.postData('/register', body)
+      .then(response => {
+        const message = response.message;
+        this.modal="successModal";
+      })
+      .catch(error => {
+        let statusCode = error.status;
+        let message = error.error.message;
+      });
+
+          
+    }
+    console.log(this.modal);
+    
+  }
 }

@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Stock } from '../search-bar/stocks';
+import { Stock } from '../Interfaces/stocks';
+import { BACKEND_URL } from '../app.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetDataService {
-  private url = 'http://127.0.0.1:3000/stocks';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(BACKEND_URL) private url: string) { }
 
-  getData(): Observable<Stock[]> {
-    return this.http.get<Stock[]>(this.url);
+  getData(route: string): Observable<Stock[]> {
+    return this.http.get<Stock[]>(this.url + route);
   }
 }

@@ -3,7 +3,7 @@ import { GetDataService } from '../services/get-data.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, startWith } from 'rxjs';
-import { Stock } from './stocks';
+import { Stock } from '../Interfaces/stocks';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,7 +18,7 @@ export class SearchBarComponent implements OnInit{
   formcontrol = new FormControl('');
 
   constructor(private getStockService: GetDataService){
-    this.getStockService.getData().subscribe({
+    this.getStockService.getData('/stocks').subscribe({
       next: (stocks) => {
         console.log(stocks);
         this.stocks = stocks;
