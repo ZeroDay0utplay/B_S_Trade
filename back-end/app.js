@@ -23,7 +23,10 @@ global.__basedir = __dirname;
 // inject psql Pool into request for a goal of single connection to DB
 app.use(databaseMiddleware);
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'http://localhost:5432']
+}));
 app.use(errorHandlerMiddleware);
 app.use(cookieParser());
 

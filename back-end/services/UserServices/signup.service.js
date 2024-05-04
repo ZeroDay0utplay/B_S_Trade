@@ -10,7 +10,7 @@ async function register(email, password, full_name, job, pool, table='users'){
             const hashedPassword = bcrypt.hashSync(password, 10);
             const queryService = new QueryService(pool).psqlPool;
             await queryService.query(`INSERT INTO ${table} (email, password, full_name, job) VALUES ('${email}', '${hashedPassword}', '${full_name}', '${job}');`);
-            return "user added succesfully";
+            return "Successful Registration, please check for confirmation";
         }
         return data;  
     } catch (error) {

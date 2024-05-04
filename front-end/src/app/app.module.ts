@@ -14,7 +14,6 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
 
@@ -28,7 +27,6 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
     RegisterComponent,
     IntroComponent,
     LoginComponent,
-    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +38,7 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
   ],
   providers: [
     {
-      provide: BACKEND_URL, useValue: 'http://192.168.1.40:3000'
+      provide: BACKEND_URL, useValue: 'http://localhost:3000'
     }
   ],
   bootstrap: [AppComponent]

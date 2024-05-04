@@ -1,1 +1,53 @@
-<p>login works!</p>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 40px; flex-direction: column;">
+    <div class="landing-logo">
+        <img src="../../assets/images/logo.png" alt="">
+        <a class="navbar-brand bstrade-logo-phrase" href="#">B&S Trade</a>
+    </div>
+
+    <!-- ALERTS -->
+
+    <div *ngIf="alert_success" class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ alert_message_success }}</h4>
+        <button onclick="location.href='/'" type="button" class="btn btn-success" style="margin-left: 40%; background-color: rgb(11, 104, 4);">Proceed</button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div *ngIf="alert_danger" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom: 30px;">
+        <strong>{{ alert_message_danger }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div *ngIf="alert_warning" class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-bottom: 30px;">
+        <strong>{{ alert_message_warning }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <h1 style="font-weight: bold; margin-bottom: 70px; margin-top: 60px;">Sign in to your account</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
+      
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input required matInput formControlName="email">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input required matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="link-container">
+            <a routerLink="/register" style="margin-left: -180px; margin-top: -5px;">don't have an account ?</a>
+            <a routerLink="/route2" style="margin-right: -180px; margin-top: -5px; color: black;">forgot password ?</a>
+          </div>
+        <button class="sub-btn" mat-raised-button type="submit">Sign In</button>
+    </form>
+</div>

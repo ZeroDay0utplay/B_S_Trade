@@ -16,7 +16,7 @@ async function login(email, password, pool){
             return ["Invalid password", user_id];
         }
         if (!(user.is_verified)) return ["Verify your account", user_id];
-        return ["user logged in successfully", user_id];
+        return ["You have been logged in successfully", user_id];
         
     } catch (error) {
         return "Login ERROR";

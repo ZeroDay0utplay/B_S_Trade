@@ -19,7 +19,7 @@ async function register(req, res, next){
             case "User already exists":
                 statusCode = 411;
                 break;
-            case "user added succesfully":
+            case "Successful Registration, please check for confirmation":
                 let sendResponse = await sendVerifMailService.send_mail(email, pool);
                 statusCode = (sendResponse == "Verification mail has been sent successfully") ? 200: 400;
                 break;

@@ -3,6 +3,23 @@
         <img src="../../assets/images/logo.png" alt="">
         <a class="navbar-brand bstrade-logo-phrase" href="#">B&S Trade</a>
     </div>
+
+    <!-- ALERTS -->
+
+    <div *ngIf="alert_danger" class="alert alert-danger" role="alert" style="margin-bottom: 30px;">
+        {{ alert_message_danger }}
+    </div>
+
+    <div *ngIf="alert_success" class="alert alert-success" role="alert" style="margin-bottom: 30px;">
+        {{ alert_message_success }}
+    </div>
+
+    <div *ngIf="alert_warning" class="alert alert-warning" role="alert" style="margin-bottom: 30px;">
+        {{ alert_message_warning }}
+    </div>
+
+    <h1 style="font-weight: bold;">Create Your Account</h1>
+
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
         <mat-form-field class="rounded-input" appearance="outline">
           <mat-label>Full Name</mat-label>
@@ -32,8 +49,8 @@
             <button type="button" mat-icon-button matSuffix (click)="hideConf = !hideConf" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hideConf ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-        </mat-form-field>   
+        </mat-form-field> 
+        <a routerLink="/login" style="margin-left: -200px; margin-top: -5px; margin-bottom: 40px;">Already have an account ?</a>  
         <button class="sub-btn" mat-raised-button type="submit">Register</button>
     </form>
 </div>
-<app-success-dialog></app-success-dialog>
