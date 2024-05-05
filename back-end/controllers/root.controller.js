@@ -1,6 +1,3 @@
-const { check } = require("../services/UserServices/checkToken.service");
-
-
 async function getController(req, res, next){
     try {
         res.status(200);

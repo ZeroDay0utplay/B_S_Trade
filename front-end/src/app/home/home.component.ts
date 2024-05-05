@@ -13,7 +13,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
       this.getService.getData('/')
       .subscribe(
-        data => console.log(data)
+        data => {
+          
+        },
+        error => {
+          
+        }
       );
   }
 }
