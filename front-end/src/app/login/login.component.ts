@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostDataService } from '../services/post-data.service';
 import { User } from '../Interfaces/user';
@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent{
+
+  constructor(private postDataService: PostDataService){} //private cookieService: CookieService){}
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, new EmailValidatorService().emailValidator()]),
     password: new FormControl(''),
@@ -21,13 +24,18 @@ export class LoginComponent {
   hide = true;
 
   alert_success = false;
-  alert_message_success = "";
-  alert_message_danger = "";
   alert_danger = false;
   alert_warning = false;
+  
+  alert_message_success = "";
+  alert_message_danger = "";
   alert_message_warning = "";
 
-  constructor(private postDataService: PostDataService, private router: Router){} //private cookieService: CookieService){}
+  setAllFalse(){
+    this.alert_danger = false;
+    this.alert_success = false;
+    this.alert_warning = false;
+  }
 
   onSubmit() {
     if (this.loginForm.valid){
@@ -39,12 +47,14 @@ export class LoginComponent {
         // this.cookieService.set("auth_token", auth_token);
         document.cookie = `auth_token=${auth_token}`;
         console.log(auth_token);
+        this.setAllFalse();
         this.alert_success = true;
         this.alert_message_success = message;
       })
       .catch(error => {
         let statusCode = error.status;
         let message = error.error.message;
+        this.setAllFalse();
         if (statusCode == 406){
           this.alert_warning = true;
           this.alert_message_warning = message;

@@ -11,7 +11,7 @@ export class GetDataService {
 
   constructor(private http: HttpClient, @Inject(BACKEND_URL) private url: string) { }
 
-  getData(route: string): Observable<Stock[]> {
-    return this.http.get<Stock[]>(this.url + route);
+  getData(route: string): Observable<any> {
+    return this.http.get(this.url + route);
   }
 }

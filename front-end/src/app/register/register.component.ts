@@ -22,13 +22,20 @@ export class RegisterComponent {
   hideConf = true;
   
   alert_success = false;
-  alert_message_success = "";
-  alert_message_danger = "";
   alert_danger = false;
   alert_warning = false;
+
+  alert_message_success = "";
+  alert_message_danger = "";
   alert_message_warning = "";
 
   constructor(private postDataService: PostDataService){}
+
+  setAllFalse(){
+    this.alert_danger = false;
+    this.alert_success = false;
+    this.alert_warning = false;
+  }
 
   onSubmit() {
     if (this.registrationForm.valid){
@@ -36,6 +43,7 @@ export class RegisterComponent {
       let confirm_password = this.registrationForm.value.confirm_password;
       
       if (password !== confirm_password){
+        this.setAllFalse();
         this.alert_danger = true;
         this.alert_message_danger = "Password and Confirm Password do not match!";
         return;
@@ -46,12 +54,14 @@ export class RegisterComponent {
       this.postDataService.postData('/register', body)
       .then(response => {
         const message = response.message;
+        this.setAllFalse();
         this.alert_success = true;
         this.alert_message_success = message;
       })
       .catch(error => {
         let statusCode = error.status;
         let message = error.error.message;
+        this.setAllFalse();
         if (statusCode === 411){
           this.alert_warning = true;
           this.alert_message_warning = message;
