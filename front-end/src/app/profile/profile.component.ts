@@ -1,25 +1,62 @@
-import { Component, OnInit, getDebugNode } from '@angular/core';
-import { GetDataService } from '../services/get-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FileUploadService } from '../services/file-upload.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit{
-  constructor(private getDataService: GetDataService, private route: ActivatedRoute){}
-  
-  name = "User";
 
-  ngOnInit(): void {
-    const userId = this.route.snapshot.paramMap.get('id');
-    const data = this.getDataService.getData('/profile/'+userId)
-    .subscribe(
-      data => {
-        this.name = data.name.full_name;
-      }
-    )
+
+export class ProfileComponent{
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+
+  fileInfos?: Observable<any>;
+
+  constructor(private uploadService: FileUploadService) {}
+
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
   }
 
+  upload(): void {
+    this.progress = 0;
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.currentFile = file;
+
+        this.uploadService.upload(this.currentFile, 'e949092c724d30df7675750a01a8ea0c').subscribe({
+          next: (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round((100 * event.loaded) / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+            }
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+
+            this.currentFile = undefined;
+          },
+        });
+      }
+
+      this.selectedFiles = undefined;
+    }
+  }
 }

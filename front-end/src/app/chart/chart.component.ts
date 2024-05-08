@@ -23,14 +23,14 @@ export class ChartComponent implements OnInit{
       data: {
         labels: this.genData()[2],
         datasets: [{
-          label: 'My Dataset',
+          label: 'Gold',
           borderWidth: 1,
           pointRadius: 0,
           data: this.genData()[0],
           borderColor: '#FFDB01'
         },
         {
-          label: 'My Dataset',
+          label: 'Apple',
           borderWidth: 1,
           pointRadius: 0,
           data: this.genData()[1],
@@ -39,9 +39,14 @@ export class ChartComponent implements OnInit{
       ],
       },
       options: {
+        plugins:{
+          legend: {
+            display: false
+          }
+        },
         animation: {
           duration: 10000,
-          easing: 'easeInOutQuart'
+          easing: 'easeOutQuart'
         }
         // animation: this.animateChart(),
       }

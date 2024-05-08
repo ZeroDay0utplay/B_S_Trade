@@ -8,7 +8,7 @@ async function updateProfile(req, res, next){
     try {
         await uploadFile(req, res);
         const pool = req.pool;
-        const user_id = req.user.userId;
+        const user_id = req.params.id;
         const file = req.file;
         if (file != undefined){
             const filePath = `${file.destination}\\${file.originalname}`;

@@ -1,15 +1,28 @@
-<ul class="navbar-nav ml-auto align-items-center">
-    <li class="nav-item">
-        <img src="../../assets/images/fontisto_world-o.png" alt="Language Icon" class="language-icon">
-    </li>
-    <li class="nav-item dropdown"  style="margin-right: 15px;">
-        <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            English
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">English</a>
-            <a class="dropdown-item" href="#">French</a>
-            <a class="dropdown-item" href="#">Arabic</a>
-        </div>
-    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <label class="btn btn-default p-0">
+        <input type="file" (change)="selectFile($event)" />
+        </label>
+    </div>
+
+    <div class="col-4">
+        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+        Upload
+        </button>
+    </div>
+    </div>
+
+    <div *ngIf="currentFile" class="progress my-3">
+    <div
+        class="progress-bar progress-bar-info"
+        role="progressbar"
+        attr.aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progress + '%' }"
+    >
+        {{ progress }}%
+    </div>
+    </div>
+
+    <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
