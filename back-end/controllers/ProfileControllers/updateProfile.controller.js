@@ -9,7 +9,6 @@ async function updateProfile(req, res, next){
         await uploadFile(req, res);
         const pool = req.pool;
         const user_id = req.user.userId;
-        //const user_id = 'c8ca9a55d5f82870347da982811942f5';
         const file = req.file;
         if (file != undefined){
             const filePath = `${file.destination}\\${file.originalname}`;

@@ -18,11 +18,10 @@ export class SearchBarComponent implements OnInit{
   formcontrol = new FormControl('');
 
   constructor(private getStockService: GetDataService){
-    this.getStockService.getData('/stocks').subscribe({
-      next: (stocks) => {
-        this.stocks = stocks;
-      }
-    })
+    this.getStockService.getData('/stocks')
+    .subscribe(
+      stocks => this.stocks = stocks 
+    )
   }
 
   ngOnInit(){

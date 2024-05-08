@@ -2,7 +2,7 @@
     <div style="margin: 2% 2%;">
         <h1 class="intro-title">Unlock the power of informed investment decisions with our cutting-edge stock prediction platform.</h1>
         <p class="gen-intro">At B&S.Trade , we understand the complexities of the financial markets and the challenges investors face in making confident choices.</p>
-        <div class="user-handling">
+        <div *ngIf="!logedIn" class="user-handling">
             <button routerLink="register" mat-flat-button color="primary" class="get-started">Get Started</button>
             <a routerLink="login" class="had-acc">Already have an account?</a>
         </div>  

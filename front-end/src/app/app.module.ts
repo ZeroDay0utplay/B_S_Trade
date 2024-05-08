@@ -14,6 +14,9 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartComponent } from './chart/chart.component';
+
 
 export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
 
@@ -27,6 +30,7 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
     RegisterComponent,
     IntroComponent,
     LoginComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,7 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [
     {

@@ -1,6 +1,6 @@
-const checkTokenService = require("../../services/UserServices/checkToken.service");
 const { getData } = require("../../services/DB_Services/getData.service");
 const { update } = require("../../services/DB_Services/update.service");
+const { check } = require("../../services/UserServices/JWT.service");
 
 
 async function verifyController(req, res, next){
@@ -8,7 +8,7 @@ async function verifyController(req, res, next){
         const token = (req.params.token).toString();
         const user_id = req.params.user_id;
         const pool = req.pool;
-        let expiredToken = checkTokenService.check(token);
+        let expiredToken = check(token);
 
         if (expiredToken === true)
             return res.status(403).json({message: 'Your verification link may have expired. Please click on resend for verify your Email.'});

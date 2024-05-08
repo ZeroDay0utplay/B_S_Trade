@@ -11,4 +11,9 @@ async function check(token){
     });
 }
 
-module.exports = {check};
+async function getId(token){
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    return decoded.userId;
+}
+
+module.exports = {check, getId};

@@ -5,7 +5,6 @@ const sendVerifMailService = require("../../services/UserServices/verifMailSende
 async function register(req, res, next){
     try {
         const pool = req.pool;
-        console.log(req.body);
         const email = req.body.email;
         const password = req.body.password;
         const full_name = req.body.full_name;

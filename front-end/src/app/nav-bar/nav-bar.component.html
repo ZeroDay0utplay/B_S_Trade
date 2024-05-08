@@ -24,16 +24,39 @@
         </li>
         <li class="nav-item dropdown"  style="margin-right: 15px;">
             <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                English
+                <b>English</b>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">English</a>
-                <a class="dropdown-item" href="#">French</a>
-                <a class="dropdown-item" href="#">Arabic</a>
+                <a class="dropdown-item" href="#"><b>English</b></a>
+                <a class="dropdown-item" href="#"><b>French</b></a>
+                <a class="dropdown-item" href="#"><b>Arabic</b></a>
             </div>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!logedIn" class="nav-item">
             <button routerLink="register" type="button" class="btn btn-outline-primary btn-md border-dark" style="font-weight: bold; margin-left: 10px;">Sign Up</button>
+        </li>
+
+        <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
+          <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="../../assets/images/mdi_bell-ring-outline.png" alt="">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Edit profile</a>
+              <a class="dropdown-item" href="#">Billing Information</a>
+              <a class="dropdown-item" href="#">Change Light Mode</a>
+              <a class="dropdown-item" href="#">Log Out</a>
+          </div>
+        </li>
+        <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
+          <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="../../assets/images/carbon_user-avatar.png" alt="">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/profile/{{user_id}}"> <b>Edit profile</b> <img class="profile-icon" src="../../assets/images/line-md_edit.png"> </a>
+              <a class="dropdown-item" href="#"> <b>Billing Information</b> <img class="profile-icon" src="../../assets/images/material-symbols_medical-information-outline-rounded.png"> </a>
+              <a class="dropdown-item" href="#"> <b>Change Light Mode</b> <img class="profile-icon" src="../../assets/images/tdesign_mode-dark.png"> </a>
+              <a class="dropdown-item" href="/logout"> <b>Log Out</b> <img class="profile-icon" src="../../assets/images/line-md_logout.png"> </a>
+          </div>
         </li>
     </ul>    
     </div>

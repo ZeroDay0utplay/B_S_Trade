@@ -1,6 +1,6 @@
 const findUserService = require("../../services/UserServices/findUser.service");
-const checkTokenService = require("../../services/UserServices/checkToken.service");
-const updateService = require("../../services/DB_Services/update.service")
+const updateService = require("../../services/DB_Services/update.service");
+const { check } = require("../../services/UserServices/JWT.service");
 
 
 async function check_clicked_link (req, res, next) {
@@ -8,7 +8,7 @@ async function check_clicked_link (req, res, next) {
       const token = (req.params.token).toString();
       const pool = req.pool;
 
-      let expiredToken = checkTokenService.check(token);
+      let expiredToken = check(token);
 
       if (expiredToken === true) 
         return res.status(403).json({message: 'Your verification link may have expired'});
