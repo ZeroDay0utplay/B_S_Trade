@@ -1,21 +1,25 @@
-<div id="avatar-container">
-    <!-- && photo !== '' ? photo : '../../assets/images/profile_default.png' -->
-	<img id="avatar-photo" #avatarImg class="avatar-photo"
-    [src]="photo" (mouseenter)="showAddPhotoOverlay=true"
-    alt="avatar photo">
-
-	<div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
-		(mouseleave)="showAddPhotoOverlay=false">
-
-		<button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button (click)="openFileInput(fileInput)">
-      <mat-icon>add_a_photo</mat-icon>
-    </button>
-
-		<mat-icon id="remove-avatar-photo-button" *ngIf="photo && photo !== ''" (click)="removePhoto()"
-			matTooltip="remove this photo">close</mat-icon>
-	</div>
-
-	<!-- Input file -->
-	<input #fileInput type="file" (change)="addPhoto($event)" name="avatar" accept="image/png, image/jpeg"
-      style="display:none;">
+<div class="profile">
+    <app-nav-bar [logedIn]="true"></app-nav-bar>
+    <div id="avatar-container">
+        <!-- && photo !== '' ? photo : '../../assets/images/profile_default.png' -->
+        <img id="avatar-photo" #avatarImg class="avatar-photo"
+        [src]="(photo && photo !== '') ? photo : '../../assets/images/profile_default.png'" (mouseenter)="showAddPhotoOverlay=true"
+        alt="avatar photo">
+    
+        <div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
+            (mouseleave)="showAddPhotoOverlay=false">
+    
+            <button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button (click)="openFileInput(fileInput)">
+          <mat-icon>add_a_photo</mat-icon>
+        </button>
+    
+            <!-- <mat-icon id="remove-avatar-photo-button" *ngIf="photo && photo !== ''" (click)="removePhoto()"
+                matTooltip="remove this photo">close</mat-icon> -->
+        </div>
+    
+        <!-- Input file -->
+        <input #fileInput type="file" (change)="addPhoto($event)" name="avatar" accept="image/png, image/jpeg"
+          style="display:none;">
+    </div>
+    <h1 class="welcome">Welcome, {{ username }}</h1>
 </div>

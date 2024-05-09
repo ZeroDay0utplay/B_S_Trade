@@ -6,7 +6,7 @@ const { getProfile } = require("../controllers/ProfileControllers/getProfile.con
 
 
 let profileRoutes = (app) => {
-    router.get("/profile/:id", authorization, getProfile);
+    router.get("/profile/:id", getProfile);
     router.put("/profile/:id", updateProfileController.updateProfile);
     app.use(router);
 }

@@ -17,6 +17,7 @@ export class GetDataService {
       }),
       withCredentials: true
     };
+    console.log(this.url + route);
     return this.http.get(this.url + route, httpOptions);
   }
 }

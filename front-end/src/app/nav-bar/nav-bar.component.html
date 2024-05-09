@@ -1,64 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white navi" style="margin: 0 10px 10px;">
-    <div class="landing-logo">
-        <img src="../../assets/images/logo.png" alt="">
-        <a class="navbar-brand bstrade-logo-phrase" href="#">B&S Trade</a>
-    </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" style="margin-right: 30px; margin-left: 10px;">
-          <a class="nav-link" href="#" style="color: black;">Help Center</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color: black;">About</a>
-        </li>
-      </ul>
-      
-      <app-search-bar></app-search-bar>
-      
-      <ul class="navbar-nav ml-auto align-items-center">
-        <li class="nav-item">
-            <img src="../../assets/images/fontisto_world-o.png" alt="Language Icon" class="language-icon">
-        </li>
-        <li class="nav-item dropdown"  style="margin-right: 15px;">
-            <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <b>English</b>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"><b>English</b></a>
-                <a class="dropdown-item" href="#"><b>French</b></a>
-                <a class="dropdown-item" href="#"><b>Arabic</b></a>
-            </div>
-        </li>
-        <li *ngIf="!logedIn" class="nav-item">
-            <button routerLink="register" type="button" class="btn btn-outline-primary btn-md border-dark" style="font-weight: bold; margin-left: 10px;">Sign Up</button>
-        </li>
+  <div class="landing-logo">
+      <img src="../../assets/images/logo.png" alt="">
+      <a class="navbar-brand bstrade-logo-phrase" href="#">B&S Trade</a>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" style="margin-right: 30px; margin-left: 10px;">
+        <a class="nav-link" href="#" style="color: black;">Help Center</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: black;">About</a>
+      </li>
+    </ul>
+    
+    <app-search-bar></app-search-bar>
+    
+    <ul class="navbar-nav ml-auto align-items-center">
+      <li class="nav-item">
+          <img src="../../assets/images/fontisto_world-o.png" alt="Language Icon" class="language-icon">
+      </li>
+      <li class="nav-item dropdown"  style="margin-right: 15px;">
+          <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <b>English</b>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#"><b>English</b></a>
+              <a class="dropdown-item" href="#"><b>French</b></a>
+              <a class="dropdown-item" href="#"><b>Arabic</b></a>
+          </div>
+      </li>
+      <li *ngIf="!logedIn" class="nav-item">
+          <button routerLink="register" type="button" class="btn btn-outline-primary btn-md border-dark" style="font-weight: bold; margin-left: 10px;">Sign Up</button>
+      </li>
 
-        <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
-          <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="../../assets/images/mdi_bell-ring-outline.png" alt="">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Edit profile</a>
-              <a class="dropdown-item" href="#">Billing Information</a>
-              <a class="dropdown-item" href="#">Change Light Mode</a>
-              <a class="dropdown-item" href="#">Log Out</a>
-          </div>
-        </li>
-        <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
-          <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="../../assets/images/carbon_user-avatar.png" alt="">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/profile/{{user_id}}"> <b>Edit profile</b> <img class="profile-icon" src="../../assets/images/line-md_edit.png"> </a>
-              <a class="dropdown-item" href="#"> <b>Billing Information</b> <img class="profile-icon" src="../../assets/images/material-symbols_medical-information-outline-rounded.png"> </a>
-              <a class="dropdown-item" href="#"> <b>Change Light Mode</b> <img class="profile-icon" src="../../assets/images/tdesign_mode-dark.png"> </a>
-              <a class="dropdown-item" onclick="document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; location.reload()"> <b>Log Out</b> <img class="profile-icon" src="../../assets/images/line-md_logout.png"> </a>
-          </div>
-        </li>
-    </ul>    
-    </div>
-  </nav>
-  
+      <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
+        <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="../../assets/images/mdi_bell-ring-outline.png" alt="">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Edit profile</a>
+            <a class="dropdown-item" href="#">Billing Information</a>
+            <a class="dropdown-item" href="#">Change Light Mode</a>
+            <a class="dropdown-item" href="#">Log Out</a>
+        </div>
+      </li>
+      <li *ngIf="logedIn" class="nav-item dropdown"  style="margin-right: 15px;">
+        <a style="color: black;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="../../assets/images/carbon_user-avatar.png" alt="">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profile/{{user_id}}"> <b>Edit profile</b> <img class="profile-icon" src="../../assets/images/line-md_edit.png"> </a>
+            <a class="dropdown-item" href="#"> <b>Billing Information</b> <img class="profile-icon" src="../../assets/images/material-symbols_medical-information-outline-rounded.png"> </a>
+            <a class="dropdown-item" href="#"> <b>Change Light Mode</b> <img class="profile-icon" src="../../assets/images/tdesign_mode-dark.png"> </a>
+            <a class="dropdown-item" onclick="document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; location.reload()"> <b>Log Out</b> <img class="profile-icon" src="../../assets/images/line-md_logout.png"> </a>
+        </div>
+      </li>
+  </ul>    
+  </div>
+</nav>

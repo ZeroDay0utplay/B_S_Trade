@@ -3,7 +3,7 @@ const { getData } = require("../../services/DB_Services/getData.service");
 async function getProfile(req, res, next){
     try {
         const pool = req.pool;
-        const user_id = req.user.userId;
+        const user_id = req.params.id;
         const users = await getData(pool, "user_id", user_id, "users");
         let user = users[0];
         if (!user)

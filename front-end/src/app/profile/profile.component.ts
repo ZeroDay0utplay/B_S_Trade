@@ -18,20 +18,19 @@ export class ProfileComponent implements OnInit {
 
   showAddPhotoOverlay = false;
   id: any;
+  username: any;
 
   constructor(private uploadService: UploadProfileService, private route: ActivatedRoute, private getDataService: GetDataService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getDataService.getData('/profile/'+this.id).subscribe(response => {
-        const data = response.message;
-        const profile_pic = data.profile_pic;
-        const username = data.full_name;
-        this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${profile_pic}`);
-        // console.log(this.photo);
-      }, error => {
-        console.error(error);
-    });;
+      const data = response.message;
+      const profile_pic = data.profile_pic;
+      const username = data.full_name;
+      this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${profile_pic}`);
+      this.username = username;
+    });
     
   }
 
