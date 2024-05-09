@@ -1,7 +1,7 @@
 <div id="avatar-container">
-
+    <!-- && photo !== '' ? photo : '../../assets/images/profile_default.png' -->
 	<img id="avatar-photo" #avatarImg class="avatar-photo"
-    [src]="photo && photo !== '' ? photo : '../../assets/images/profile_default.png'" (mouseenter)="showAddPhotoOverlay=true"
+    [src]="photo" (mouseenter)="showAddPhotoOverlay=true"
     alt="avatar photo">
 
 	<div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"

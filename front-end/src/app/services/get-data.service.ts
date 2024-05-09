@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Stock } from '../Interfaces/stocks';
 import { BACKEND_URL } from '../app.module';
 
 @Injectable({

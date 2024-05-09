@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { UploadProfileService } from '../services/upload-profile.service';
+import { ActivatedRoute } from '@angular/router';
+import { GetDataService } from '../services/get-data.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -10,14 +13,26 @@ export class ProfileComponent implements OnInit {
 
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef | undefined;
 
-  @Input() photo: string | undefined;
+  @Input() photo: any;
   @Output() photoUpdated = new EventEmitter<string>();
 
   showAddPhotoOverlay = false;
+  id: any;
 
-  constructor(private uploadService: UploadProfileService) { }
+  constructor(private uploadService: UploadProfileService, private route: ActivatedRoute, private getDataService: GetDataService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getDataService.getData('/profile/'+this.id).subscribe(response => {
+        const data = response.message;
+        const profile_pic = data.profile_pic;
+        const username = data.full_name;
+        this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${profile_pic}`);
+        // console.log(this.photo);
+      }, error => {
+        console.error(error);
+    });;
+    
   }
 
   addPhoto(event: Event) {
@@ -31,7 +46,7 @@ export class ProfileComponent implements OnInit {
         };
         fileReader.readAsDataURL(file);
         
-        this.uploadService.update(file, 'e949092c724d30df7675750a01a8ea0c').subscribe(response => {
+        this.uploadService.update(file, 'ca0db592eaac8636f3aa20fbcdcd947f').subscribe(response => {
             console.log(response);
           }, error => {
             console.error(error);
