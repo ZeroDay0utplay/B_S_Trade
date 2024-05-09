@@ -9,6 +9,7 @@ async function send_mail(email, pool, table='users'){
         const res = await querySerice.query(`SELECT user_id FROM ${table} WHERE email = '${email}';`);
         const user_id = res.rows[0].user_id;
         const full_name = res.rows[0].full_name;
+        console.log(res.rows[0]);
         let setToken = generateAccessToken(crypto.randomBytes(16).toString("hex"), 1);
         if (setToken) {
             sendMailService.sendMail({

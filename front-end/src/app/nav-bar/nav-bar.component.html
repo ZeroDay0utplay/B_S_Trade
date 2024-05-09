@@ -55,7 +55,7 @@
               <a class="dropdown-item" href="/profile/{{user_id}}"> <b>Edit profile</b> <img class="profile-icon" src="../../assets/images/line-md_edit.png"> </a>
               <a class="dropdown-item" href="#"> <b>Billing Information</b> <img class="profile-icon" src="../../assets/images/material-symbols_medical-information-outline-rounded.png"> </a>
               <a class="dropdown-item" href="#"> <b>Change Light Mode</b> <img class="profile-icon" src="../../assets/images/tdesign_mode-dark.png"> </a>
-              <a class="dropdown-item" href="/logout"> <b>Log Out</b> <img class="profile-icon" src="../../assets/images/line-md_logout.png"> </a>
+              <a class="dropdown-item" onclick="document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; location.reload()"> <b>Log Out</b> <img class="profile-icon" src="../../assets/images/line-md_logout.png"> </a>
           </div>
         </li>
     </ul>    

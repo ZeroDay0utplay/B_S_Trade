@@ -6,7 +6,6 @@ const { readImage } = require("../../services/ProfileServices/read_image.service
 
 async function updateProfile(req, res, next){
     try {
-        console.log(req);
         await uploadFile(req, res);
         const pool = req.pool;
         const user_id = req.params.id;
