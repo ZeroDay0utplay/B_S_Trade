@@ -10,6 +10,7 @@ const userRoutes = require("./routes/user.routes");
 const rootRoute = require("./routes/root.route");
 const profileRoutes = require("./routes/profile.routes");
 const stocksRoute = require("./routes/stocks.routes");
+const notifsRoute = require("./routes/notifications.route");
 
 
 
@@ -36,7 +37,7 @@ rootRoute(app);
 userRoutes(app);
 profileRoutes(app);
 stocksRoute(app);
-
+notifsRoute(app);
 
 // server
 app.listen(port, () => {

@@ -41,18 +41,19 @@ CREATE TABLE stock_data (
 
 CREATE TABLE starred_box(
     starred_box_id SERIAL PRIMARY KEY,
-    stocks VARCHAR(50) REFERENCES Stock(id)
+    user_id CHAR(255) REFERENCES users(user_id),
+    stock_id INTEGER REFERENCES stocks(stock_id)
 );
 
 
 
 CREATE TABLE notif(
     notif_id SERIAL PRIMARY KEY,
-    stock VARCHAR(50) NOT NULL,
-    msg VARCHAR5(512) NOT NULL
+    stock_id INTEGER REFERENCES stocks(stock_id),
+    msg VARCHAR(512) NOT NULL
 );
 
-CREATE TABLE notifications(
-    notifications_id SERIAL PRIMARY KEY,
-    notifs REFERENCES Notif(stock)
-);
+-- CREATE TABLE notifications(
+--     notifications_id SERIAL PRIMARY KEY,
+--     notifs REFERENCES Notif(stock)
+-- );
