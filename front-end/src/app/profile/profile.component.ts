@@ -100,11 +100,9 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.updateForm.valid){
-      const body: User = this.updateForm.value as User;
-      console.log(body);
-      
+      const body: User = this.updateForm.value as User;      
       this.updateService.update(body, '/profile/'+this.id).subscribe(response => {
-        const message = response.message;
+        const message = response.body.message;
         this.setAllFalse();
         this.alert_success = true;
         this.alert_message_success = message;
