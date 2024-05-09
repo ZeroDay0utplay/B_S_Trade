@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
       const data = response.message;
       const profile_pic = data.profile_pic;
       const username = data.full_name;
-      this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${profile_pic}`);
+      this.photo = (profile_pic) ? this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${profile_pic}`): null;
       this.username = username;
     });
     
