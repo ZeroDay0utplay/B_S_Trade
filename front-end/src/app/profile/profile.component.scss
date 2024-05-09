@@ -1,14 +1,22 @@
-.profile{
-}
-
 #avatar-container {
 	position: relative;
+	margin-left: 45%;
+	margin-top: 2%;
+}
+
+.welcome{
+	margin-top: 40px;
+	margin-left: -25px;
+	font-family: Montserrat;
+	font-weight: 700;
+	font-size: 30px;
+	margin-bottom: 40px;
 }
 
 #avatar-photo,
 #add-photo-overlay {
-	height: 8rem;
-	width: 8rem;
+	height: 13rem;
+	width: 13rem;
 }
 
 #add-photo-overlay {
@@ -63,4 +71,50 @@
 	width: 50px;
 	border-radius: 50%;
 	box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+// FORM
+
+mat-form-field{
+    width: 300px;
+	height: 80px;
+	margin-left: 80px;
+}
+
+.sub-btn{
+	margin-left: 60px;
+    background-color: black !important;
+    color: #FFDB01 !important;
+	margin-top: 20px;
+}
+
+.landing-logo{
+    margin-bottom: 40px;
+}
+
+.landing-logo a{
+    color: black !important;
+    font-size: 40px;
+}
+
+.landing-logo img{
+    width: 70px;
+}
+
+.mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 30px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper{
+    background-color: transparent !important;
+    height: 45px !important;
+    border-radius: 0px !important;
+    border: none !important;
+}
+
+.label-icon{
+	height: 30px;
+	width: 30px;
+	margin-left: -30px;
 }

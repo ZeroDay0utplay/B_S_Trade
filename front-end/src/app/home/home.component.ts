@@ -10,30 +10,24 @@ import { GetDataService } from '../services/get-data.service';
 export class HomeComponent implements OnInit {
   constructor(private getService: GetDataService){
     this.logedIn = false;
-    this.profile_pic = "";
     this.user_id = "";
   }
 
-  profile_pic: string;
-  user_id: string;
-  logedIn: boolean;
+  user_id: any;
+  logedIn: any;
 
   
   ngOnInit(): void {
     this.getService.getData('/')
     .subscribe(
       data => {
-        const profile_pic = data.photo;
-        const user_id = data.user_id;
-        this.profile_pic = profile_pic;
         this.logedIn = true;
-        this.user_id = user_id;
+        this.user_id = data.user_id;
+        console.log(this.logedIn);
       },
       error => {
           this.logedIn = false;
       }
     );
-    console.log(this.logedIn);
-    
   }
 }

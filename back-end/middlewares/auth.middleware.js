@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { log } = require("util");
 
 
 function generateAccessToken(userId, duration) {

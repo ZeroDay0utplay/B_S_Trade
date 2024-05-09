@@ -27,6 +27,7 @@
     "ng-apexcharts": "^1.8.0",
     "ng-autocomplete": "^1.0.0",
     "ng2-charts": "^5.0.4",
+    "ngx-cookie-service": "^17.1.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.8",
     "tslib": "^2.3.0",

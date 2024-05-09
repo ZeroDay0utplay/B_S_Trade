@@ -21,14 +21,14 @@ global.__basedir = __dirname;
 
 // middlewares
 // inject psql Pool into request for a goal of single connection to DB
+app.use(cookieParser());
 app.use(databaseMiddleware);
-app.use(bodyParser.json({limit: '60mb'}));
+app.use(bodyParser.json({limit: '30mb'}));
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:4200', 'http://localhost:5432']
+    origin: ['http://localhost:4200', 'http://localhost:5432', 'http://192.168.32.200:4200', 'http://192.168.32.200:5432']
 }));
 app.use(errorHandlerMiddleware);
-app.use(cookieParser());
 
 
 // Routes

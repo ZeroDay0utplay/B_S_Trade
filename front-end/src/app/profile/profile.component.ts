@@ -3,6 +3,10 @@ import { UploadProfileService } from '../services/upload-profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { GetDataService } from '../services/get-data.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmailValidatorService } from '../services/email-validator.service';
+import { User } from '../Interfaces/user';
+import { UpdateService } from '../services/update.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +14,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+  updateForm = new FormGroup({
+    full_name: new FormControl(''),
+    email: new FormControl('', [Validators.required, new EmailValidatorService().emailValidator()]),
+    job: new FormControl(''),
+    bio: new FormControl(''),
+    // password: new FormControl(''),
+  });
 
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef | undefined;
 
@@ -20,7 +32,20 @@ export class ProfileComponent implements OnInit {
   id: any;
   username: any;
 
-  constructor(private uploadService: UploadProfileService, private route: ActivatedRoute, private getDataService: GetDataService, private sanitizer: DomSanitizer) { }
+  alert_success = false;
+  alert_danger = false;
+  alert_warning = false;
+
+  alert_message_success = "";
+  alert_message_danger = "";
+  alert_message_warning = "";
+
+  constructor(private uploadService: UploadProfileService,
+    private route: ActivatedRoute,
+    private getDataService: GetDataService,
+    private sanitizer: DomSanitizer,
+    private updateService: UpdateService
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -45,7 +70,7 @@ export class ProfileComponent implements OnInit {
         };
         fileReader.readAsDataURL(file);
         
-        this.uploadService.update(file, 'ca0db592eaac8636f3aa20fbcdcd947f').subscribe(response => {
+        this.uploadService.update(file, this.id).subscribe(response => {
             console.log(response);
           }, error => {
             console.error(error);
@@ -65,6 +90,36 @@ export class ProfileComponent implements OnInit {
     this.avatarImgElement!.nativeElement.src = '';
     this.photo = '';
     this.photoUpdated.emit(this.photo);
+  }
+
+  setAllFalse(){
+    this.alert_danger = false;
+    this.alert_success = false;
+    this.alert_warning = false;
+  }
+
+  onSubmit() {
+    if (this.updateForm.valid){
+      const body: User = this.updateForm.value as User;
+      console.log(body);
+      
+      this.updateService.update(body, '/profile/'+this.id).subscribe(response => {
+        const message = response.message;
+        this.setAllFalse();
+        this.alert_success = true;
+        this.alert_message_success = message;
+      },
+      error => {
+        console.log(error);
+        let message = error.error.message;
+        this.setAllFalse();
+        this.alert_danger = true;
+        this.alert_message_danger = message;
+      });
+
+          
+    }
+    
   }
 
 }
