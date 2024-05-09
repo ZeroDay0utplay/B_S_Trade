@@ -47,6 +47,14 @@ export class ChartComponent implements OnInit{
         animation: {
           duration: 10000,
           easing: 'easeOutQuart'
+        },
+        scales:{
+          x: {
+            grid: {display: false}
+          },
+          y: {
+            grid: {display: false}
+          }
         }
         // animation: this.animateChart(),
       }
