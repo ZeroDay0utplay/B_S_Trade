@@ -1,62 +1,56 @@
-import { Component } from '@angular/core';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { FileUploadService } from '../services/file-upload.service';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { UploadProfileService } from '../services/upload-profile.service';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
+export class ProfileComponent implements OnInit {
 
+  @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef | undefined;
 
-export class ProfileComponent{
-  selectedFiles?: FileList;
-  currentFile?: File;
-  progress = 0;
-  message = '';
+  @Input() photo: string | undefined;
+  @Output() photoUpdated = new EventEmitter<string>();
 
-  fileInfos?: Observable<any>;
+  showAddPhotoOverlay = false;
 
-  constructor(private uploadService: FileUploadService) {}
+  constructor(private uploadService: UploadProfileService) { }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+  ngOnInit() {
   }
 
-  upload(): void {
-    this.progress = 0;
+  addPhoto(event: Event) {
+    const target = event.target as HTMLInputElement;
 
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+    if (target.files && target.files.length > 0) {        
+        const file = target.files[0];
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          this.avatarImgElement!.nativeElement.src = fileReader.result as string;
+        };
+        fileReader.readAsDataURL(file);
+        
+        this.uploadService.update(file, 'e949092c724d30df7675750a01a8ea0c').subscribe(response => {
+            console.log(response);
+          }, error => {
+            console.error(error);
+          });;
 
-      if (file) {
-        this.currentFile = file;
-
-        this.uploadService.upload(this.currentFile, 'e949092c724d30df7675750a01a8ea0c').subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round((100 * event.loaded) / event.total);
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.progress = 0;
-
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = 'Could not upload the file!';
-            }
-
-            this.currentFile = undefined;
-          },
-        });
+        //this.photo = 'xxxx';
+        this.photoUpdated.emit(this.photo);
       }
-
-      this.selectedFiles = undefined;
     }
+
+  openFileInput(fileInput: { click: () => void; }){
+    fileInput.click()
+    this.showAddPhotoOverlay=false
   }
+
+  removePhoto() {
+    this.avatarImgElement!.nativeElement.src = '';
+    this.photo = '';
+    this.photoUpdated.emit(this.photo);
+  }
+
 }

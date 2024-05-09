@@ -1,28 +1,21 @@
-<div class="row">
-    <div class="col-8">
-        <label class="btn btn-default p-0">
-        <input type="file" (change)="selectFile($event)" />
-        </label>
-    </div>
+<div id="avatar-container">
 
-    <div class="col-4">
-        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-        Upload
-        </button>
-    </div>
-    </div>
+	<img id="avatar-photo" #avatarImg class="avatar-photo"
+    [src]="photo && photo !== '' ? photo : 'https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg'" (mouseenter)="showAddPhotoOverlay=true"
+    alt="avatar photo">
 
-    <div *ngIf="currentFile" class="progress my-3">
-    <div
-        class="progress-bar progress-bar-info"
-        role="progressbar"
-        attr.aria-valuenow="{{ progress }}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        [ngStyle]="{ width: progress + '%' }"
-    >
-        {{ progress }}%
-    </div>
-    </div>
+	<div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
+		(mouseleave)="showAddPhotoOverlay=false">
 
-    <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+		<button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button (click)="openFileInput(fileInput)">
+      <mat-icon>add_a_photo</mat-icon>
+    </button>
+
+		<mat-icon id="remove-avatar-photo-button" *ngIf="photo && photo !== ''" (click)="removePhoto()"
+			matTooltip="remove this photo">close</mat-icon>
+	</div>
+
+	<!-- Input file -->
+	<input #fileInput type="file" (change)="addPhoto($event)" name="avatar" accept="image/png, image/jpeg"
+      style="display:none;">
+</div>

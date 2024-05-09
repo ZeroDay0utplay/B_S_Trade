@@ -1,17 +1,16 @@
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { BACKEND_URL } from '../app.module';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
+export class UploadProfileService {
 
   constructor(private http: HttpClient, @Inject(BACKEND_URL) private url: string) { }
 
-  upload(file: File, id: string): Observable<HttpEvent<any>> {
-    console.log(`${this.url}/profile/${id}`);
+  update(file: any, id: string): Observable<any>{
     const formData: FormData = new FormData();
 
     formData.append('file', file);
@@ -23,3 +22,4 @@ export class FileUploadService {
     return this.http.request(req);
   }
 }
+

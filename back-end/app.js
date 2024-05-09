@@ -22,7 +22,7 @@ global.__basedir = __dirname;
 // middlewares
 // inject psql Pool into request for a goal of single connection to DB
 app.use(databaseMiddleware);
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '60mb'}));
 app.use(cors({
     credentials: true,
     origin: ['http://localhost:3000', 'http://localhost:4200', 'http://localhost:5432']
