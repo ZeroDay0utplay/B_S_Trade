@@ -33,7 +33,7 @@ const routes: Routes = [
     component: ForgetPasswordComponent
   },
   {
-    path: 'change_pwd',
+    path: 'change_pwd/:user_id',
     component: ChangePwdComponent
   }
 ];

@@ -11,21 +11,28 @@
         [alert_message_danger]="alert_message_danger"
         [alert_message_success]="alert_message_success"
         [alert_message_warning]="alert_message_warning"
-        [nextRoute]="'/change_pwd'"
+        [nextRoute]="'/'"
     >
     </app-alerts>
 
-    <h1 style="font-weight: bold; margin-top: 60px;">Forget you password ?</h1>
-    <p style="font-family: Montserrat; font-weight: 300; margin-top: 80px; margin-bottom: 70px;">
-        insert your email and hit the button below to get your verification code
-    </p>
+    <h1 style="font-weight: bold; margin-top: 60px; margin-bottom: 80px;">Reset you Password</h1>
 
-    <form [formGroup]="forgetForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
+    <form [formGroup]="resetForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
       
         <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input required matInput formControlName="email">
+            <mat-label>New password</mat-label>
+            <input required matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field>
-        <button class="sub-btn" mat-raised-button type="submit">Send Mail</button>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm New password</mat-label>
+            <input required matInput [type]="hideConf ? 'password' : 'text'" formControlName="confirm_password">
+            <button type="button" mat-icon-button matSuffix (click)="hideConf = !hideConf" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hideConf ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field> 
+        <button class="sub-btn" mat-raised-button type="submit">Reset Password</button>
     </form>
 </div>

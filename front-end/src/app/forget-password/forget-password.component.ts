@@ -16,8 +16,9 @@ export class ForgetPasswordComponent {
     email: new FormControl('', [Validators.required, new EmailValidatorService().emailValidator()]),
     password: new FormControl(''),
   });
-  
-  hide = true;
+
+  nextRoute: any;
+
 
   alert_success = false;
   alert_danger = false;
@@ -39,7 +40,7 @@ export class ForgetPasswordComponent {
       this.postDataService.postData('/sendMFP', body)
       .then(response => {
         const message = response.message;
-        console.log(message);
+        this.nextRoute = '/change_pwd/'+response.user_id;
         this.setAllFalse();
         this.alert_success = true;
         this.alert_message_success = message;
