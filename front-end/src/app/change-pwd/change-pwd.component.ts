@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PostDataService } from '../services/post-data.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../Interfaces/user';
 import { EmailValidatorService } from '../services/email-validator.service';
-// import { CookieService } from 'ngx-cookie-service';
-
+import { PostDataService } from '../services/post-data.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-change-pwd',
+  templateUrl: './change-pwd.component.html',
+  styleUrls: ['./change-pwd.component.scss']
 })
-export class LoginComponent{
-
+export class ChangePwdComponent {
   constructor(private postDataService: PostDataService){} //private cookieService: CookieService){}
 
-  loginForm = new FormGroup({
+  forgetForm = new FormGroup({
     email: new FormControl('', [Validators.required, new EmailValidatorService().emailValidator()]),
     password: new FormControl(''),
   });
@@ -37,14 +34,12 @@ export class LoginComponent{
   }
 
   onSubmit() {
-    if (this.loginForm.valid){
-      const body: User = this.loginForm.value as User;
-      this.postDataService.postData('/login', body)
+    if (this.forgetForm.valid){
+      const body: User = this.forgetForm.value as User;
+      this.postDataService.postData('/sendMFP', body)
       .then(response => {
         const message = response.message;
-        const auth_token = response.auth_token;
-        // this.cookieService.set("auth_token", auth_token);
-        document.cookie = `auth_token=${auth_token}`;
+        console.log(message);
         this.setAllFalse();
         this.alert_success = true;
         this.alert_message_success = message;
@@ -62,9 +57,6 @@ export class LoginComponent{
           this.alert_message_danger = message;
         }
       });
-
-          
     }
-    
   }
 }

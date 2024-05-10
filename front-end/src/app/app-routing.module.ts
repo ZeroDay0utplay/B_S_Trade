@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent
+  },
+  {
+    path: 'forget_pwd',
+    component: ForgetPasswordComponent
+  },
+  {
+    path: 'change_pwd',
+    component: ChangePwdComponent
   }
 ];
 

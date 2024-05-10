@@ -16,6 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartComponent } from './chart/chart.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 
 
 export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
@@ -31,6 +34,9 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
     IntroComponent,
     LoginComponent,
     ChartComponent,
+    ForgetPasswordComponent,
+    AlertsComponent,
+    ChangePwdComponent,
   ],
   imports: [
     BrowserModule,
