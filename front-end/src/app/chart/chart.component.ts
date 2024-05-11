@@ -21,7 +21,7 @@ export class ChartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.chartStock("Apple", "#FFDB01", "1");
+    this.chartStock("Apple", "#0E197D", "1");
   }
   
 
@@ -33,9 +33,10 @@ export class ChartComponent implements OnInit {
 
   chartStock(stockName: string, stockColor: string, id: string) {
     this.divClick();
-    
+    console.log(id);
     this.getStockDataService.getData('/stocks/'+id).subscribe(
       response => {
+        console.log(response);
         this.chart = new Chart('myChart', {
           type: 'line',
           data: {

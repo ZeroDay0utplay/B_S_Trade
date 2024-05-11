@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ChangePwdComponent } from './change-pwd/change-pwd.component';
+import { PredictComponent } from './predict/predict.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,9 @@ const routes: Routes = [
   {
     path: 'change_pwd/:user_id',
     component: ChangePwdComponent
+  },{
+    path: 'predict/:stock_id',
+    component: PredictComponent
   }
 ];
 

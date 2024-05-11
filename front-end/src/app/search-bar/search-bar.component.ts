@@ -20,7 +20,9 @@ export class SearchBarComponent implements OnInit{
   constructor(private getStockService: GetDataService){
     this.getStockService.getData('/stocks')
     .subscribe(
-      stocks => this.stocks = stocks 
+      stocks => {
+        this.stocks = stocks;
+      }
     )
   }
 

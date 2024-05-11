@@ -24,6 +24,9 @@ stocks = {
 def validArray(id):
     df = pd.read_csv(f"../assets/{stocks[id]}.csv")
     df.reset_index(drop=True, inplace=True)
+    if (id == "2"):
+        df["Open"] = df["Open"].str.replace(',', '')
+        df["Open"] = df["Open"].astype('float64')
     dates = [x for x in df.Date]
     values = [x for x in df.Open]
     return {"Date": dates, "Values": values}

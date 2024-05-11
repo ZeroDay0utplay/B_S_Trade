@@ -20,6 +20,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { AlertsComponent } from './alerts/alerts.component';
 import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 import { environment } from './env';
+import { PredictComponent } from './predict/predict.component';
 
 
 export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
@@ -38,6 +39,7 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
     ForgetPasswordComponent,
     AlertsComponent,
     ChangePwdComponent,
+    PredictComponent,
   ],
   imports: [
     BrowserModule,
