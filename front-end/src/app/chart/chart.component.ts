@@ -13,9 +13,7 @@ export class ChartComponent implements OnInit {
   canvas: HTMLCanvasElement = document.createElement('canvas');
   ctx: CanvasRenderingContext2D = this.canvas.getContext('2d')!;
 
-  labels = Array.from({ length: 1000 }, (_, i) => `Label ${i + 1}`);
   data: any;
-  data2 = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 1000));
 
   constructor(
     private getStockDataService: GetStockDataService
@@ -23,18 +21,33 @@ export class ChartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getStockDataService.getData('/stocks/1').subscribe(
+    this.chartStock("Apple", "#FFDB01", "1");
+  }
+  
+
+  divClick() {
+    var chartExist = Chart.getChart("myChart"); // <canvas> id
+    if (chartExist != undefined) 
+      chartExist.destroy();
+  } 
+
+  chartStock(stockName: string, stockColor: string, id: string) {
+    this.divClick();
+    
+    this.getStockDataService.getData('/stocks/'+id).subscribe(
       response => {
         this.chart = new Chart('myChart', {
           type: 'line',
           data: {
             labels: response["Date"],
             datasets: [{
-              label: 'Gold',
+              label: stockName,
               borderWidth: 1,
               pointRadius: 0,
               data: response["Values"],
-              borderColor: '#FFDB01'
+              borderColor: stockColor,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: stockColor
             }
             ],
           },
