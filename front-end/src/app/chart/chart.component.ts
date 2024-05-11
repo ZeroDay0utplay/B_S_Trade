@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { GetStockDataService } from '../services/get-stock-data.service';
 
 @Component({
   selector: 'app-chart',
@@ -15,9 +16,19 @@ export class ChartComponent implements OnInit{
   labels = Array.from({length: 1000}, (_, i) => `Label ${i + 1}`);
   data = Array.from({length: 1000}, () => Math.floor(Math.random() * 1000));
   data2 = Array.from({length: 1000}, () => Math.floor(Math.random() * 1000));
+
+  constructor(
+    private getStockDataService: GetStockDataService
+  ){}
   
   
   ngOnInit() {
+    this.getStockDataService.getData('/stocks/1').subscribe(
+      response => {
+        console.log("Hello");
+        
+      }
+    )
     this.chart = new Chart('myChart', {
       type: 'line',
       data: {

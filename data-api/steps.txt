@@ -1,0 +1,10 @@
+docker build -t data-api .
+docker run -d -t --name data-api-container -p 8000:8000 python
+docker exec -it data-api-container /bin/bash
+
+* Dependencies:
+pip install -U scikit-learn
+pip install fastapi pandas uvicorn
+
+*Run
+uvicorn main:app --reload --port 8000 --host 0.0.0.0

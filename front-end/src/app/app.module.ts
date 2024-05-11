@@ -19,6 +19,7 @@ import { ChartComponent } from './chart/chart.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ChangePwdComponent } from './change-pwd/change-pwd.component';
+import { environment } from './env';
 
 
 export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
@@ -49,7 +50,7 @@ export const BACKEND_URL = new InjectionToken<string>('BACKEND_URL');
   ],
   providers: [
     {
-      provide: BACKEND_URL, useValue: 'http://localhost:3000'
+      provide: BACKEND_URL, useValue: environment.expressUrl
     }
   ],
   bootstrap: [AppComponent]

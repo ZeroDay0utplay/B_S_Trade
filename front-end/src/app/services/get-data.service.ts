@@ -11,7 +11,6 @@ export class GetDataService {
 
   constructor(private http: HttpClient,
     @Inject(BACKEND_URL) private url: string,
-    private cookieService: CookieService
   ) { }
 
   getData(route: string): Observable<any> {
