@@ -18,7 +18,6 @@ export class GetStockDataService{
       headers: new HttpHeaders({
       }),
     };
-    console.log(environment.fastapiUrl + route);
     return this.http.get(environment.fastapiUrl + route, httpOptions);
   }
 

@@ -9,7 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class GetDataService {
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     @Inject(BACKEND_URL) private url: string,
   ) { }
 
@@ -19,7 +20,6 @@ export class GetDataService {
       headers: new HttpHeaders({
       }),
     };
-    console.log(this.url + route);
     return this.http.get(this.url + route, httpOptions);
   }
 }

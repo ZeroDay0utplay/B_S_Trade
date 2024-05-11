@@ -7,88 +7,62 @@ import { GetStockDataService } from '../services/get-stock-data.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit{
+export class ChartComponent implements OnInit {
   chart: any;
 
   canvas: HTMLCanvasElement = document.createElement('canvas');
   ctx: CanvasRenderingContext2D = this.canvas.getContext('2d')!;
 
-  labels = Array.from({length: 1000}, (_, i) => `Label ${i + 1}`);
-  data = Array.from({length: 1000}, () => Math.floor(Math.random() * 1000));
-  data2 = Array.from({length: 1000}, () => Math.floor(Math.random() * 1000));
+  labels = Array.from({ length: 1000 }, (_, i) => `Label ${i + 1}`);
+  data: any;
+  data2 = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 1000));
 
   constructor(
     private getStockDataService: GetStockDataService
-  ){}
-  
-  
+  ) { }
+
+
   ngOnInit() {
     this.getStockDataService.getData('/stocks/1').subscribe(
       response => {
-        console.log("Hello");
-        
-      }
-    )
-    this.chart = new Chart('myChart', {
-      type: 'line',
-      data: {
-        labels: this.genData()[2],
-        datasets: [{
-          label: 'Gold',
-          borderWidth: 1,
-          pointRadius: 0,
-          data: this.genData()[0],
-          borderColor: '#FFDB01'
-        },
-        {
-          label: 'Apple',
-          borderWidth: 1,
-          pointRadius: 0,
-          data: this.genData()[1],
-          borderColor: '#0E197D'
-        }
-      ],
-      },
-      options: {
-        plugins:{
-          legend: {
-            display: false
-          }
-        },
-        animation: {
-          duration: 10000,
-          easing: 'easeOutQuart'
-        },
-        scales:{
-          x: {
-            grid: {display: false}
+        this.chart = new Chart('myChart', {
+          type: 'line',
+          data: {
+            labels: response["Date"],
+            datasets: [{
+              label: 'Gold',
+              borderWidth: 1,
+              pointRadius: 0,
+              data: response["Values"],
+              borderColor: '#FFDB01'
+            }
+            ],
           },
-          y: {
-            grid: {display: false}
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            animation: {
+              duration: 10000,
+              easing: 'easeOutQuart'
+            },
+            scales: {
+              x: {
+                grid: { display: false }
+              },
+              y: {
+                grid: { display: false }
+              }
+            }
+            // animation: this.animateChart(),
           }
-        }
-        // animation: this.animateChart(),
-      }
-    });
+        });
+      })
   }
 
-  genData(){
-    const data = [];
-    const data2 = [];
-    const labels = [];
-    let prev = 100;
-    let prev2 = 80;
-    for (let i = 0; i < 1000; i++) {
-      labels.push(i);
-      prev += 5 - Math.random() * 10;
-      data.push(prev);
-      prev2 += 5 - Math.random() * 10;
-      data2.push(prev2);
-    }
-    return [data, data2, labels];
-  }
-
-  animateChart(){
+  animateChart() {
     const totalDuration = 10000;
     const delayBetweenPoints = totalDuration / this.data.length;
     const previousY = (ctx: any) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
