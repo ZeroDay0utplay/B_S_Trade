@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
       data => {
         this.logedIn = true;
         this.user_id = data.user_id;
-        console.log(this.logedIn);
       },
       error => {
           this.logedIn = false;

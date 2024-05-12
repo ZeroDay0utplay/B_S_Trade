@@ -1,1 +1,34 @@
-<p>predict works!</p>
+<app-nav-bar [logedIn]="logedIn" [user_id]="user_id"></app-nav-bar>
+<app-chart [stockColor]="stockColor" [stockId]="stockId" [stockName]="stokcName"></app-chart>
+
+<!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div *ngIf="!logedIn" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h2>
+            <b>To make prediction, you need to have an account</b>
+          </h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="window.location.href='/login'" class="btn btn-secondary" style="background-color: #C8AF1D; color: black;" data-dismiss="modal">Log In</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="predict">
+    <h2 style="text-align: center;">
+        <b>
+            This chart displays daily opening prices and key technical indicators, making it easy to identify potential opportunities.
+        </b>
+    </h2>
+    <button onclick="predict()" data-toggle="modal" data-target="#exampleModal" class="pred-btn">Predict Now!</button>
+</div>

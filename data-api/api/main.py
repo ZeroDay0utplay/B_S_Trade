@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = ["http://localhost:4200"]
+origins = ["http://192.168.1.32:4200", "http://localhost:4200"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,13 +22,16 @@ stocks = {
 }
 
 def validArray(id):
-    df = pd.read_csv(f"../assets/{stocks[id]}.csv")
+    df = pd.read_csv(f"../assets/{stocks[id]}_train.csv")
     df.reset_index(drop=True, inplace=True)
     if (id == "2"):
         df["Open"] = df["Open"].str.replace(',', '')
         df["Open"] = df["Open"].astype('float64')
     dates = [x for x in df.Date]
     values = [x for x in df.Open]
+    if (id=="2"):
+        dates = dates[::-1]
+        values = values[::-1]
     return {"Date": dates, "Values": values}
 
 
@@ -38,7 +41,10 @@ async def getStocksData(id: str):
 
 @app.get("/predict/{id}")
 async def predict(id: str):
-    loaded_model = ARIMAResults.load('../assets/arima_model.pkl')
-    predictions = loaded_model.predict(start=3900, end=4000)
-    predictions = predictions.tolist()
-    return {"predictions": json.dumps(predictions)}
+    df = pd.read_csv(f"../assets/{stocks[id]}_test.csv")
+    labels = [x for x in df.Date]
+    predictions = [x for x in df.Open]
+    # loaded_model = ARIMAResults.load('../assets/arima_model.pkl')
+    # predictions = loaded_model.predict(start=3900, end=4000)
+    # predictions = predictions.tolist()
+    return {"labels": labels, "predictions": predictions}

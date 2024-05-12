@@ -27,7 +27,7 @@ app.use(databaseMiddleware);
 app.use(bodyParser.json({limit: '30mb'}));
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:4200', 'http://localhost:5432', 'http://192.168.32.200:4200', 'http://192.168.32.200:5432']
+    origin: ['http://localhost:4200', 'http://localhost:5432', 'http://192.168.1.32:4200', 'http://192.168.1.32:5432', ]
 }));
 app.use(errorHandlerMiddleware);
 

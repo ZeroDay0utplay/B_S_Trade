@@ -1,13 +1,15 @@
 <div class="chart-stock">
-    <h2 class="stock-vis">Stock Visualization</h2>
-    <a class="stock" (click)="chartStock('Apple', '#0E197D', '1')">
-        <img src="../../assets/images/blue-square.png" style="height: 25px; width: 25px;">
-        Apple Stock
-    </a>
-    <br>
-    <a class="stock" (click)='chartStock("Apple", "#FFDB01", "2");'>
-        <img src="../../assets/images/yellow-square.png" style="height: 25px; width: 25px;">
-        Gold Stock
-    </a>
+    <div id="chart-index">
+        <h2 class="stock-vis">Stock Visualization</h2>
+        <a class="stock" (click)="chartStock('Apple', '#0E197D', '1')">
+            <img src="../../assets/images/blue-square.png" style="height: 25px; width: 25px;">
+            Apple Stock
+        </a>
+        <br>
+        <a class="stock" (click)='chartStock("Apple", "#FFDB01", "2");'>
+            <img src="../../assets/images/yellow-square.png" style="height: 25px; width: 25px;">
+            Gold Stock
+        </a>
+    </div>
     <canvas id="myChart"></canvas>
 </div>

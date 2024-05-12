@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { GetStockDataService } from '../services/get-stock-data.service';
 
@@ -8,6 +8,10 @@ import { GetStockDataService } from '../services/get-stock-data.service';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
+  @Input() stockName = "Apple";
+  @Input() stockColor = "#0E197D";
+  @Input() stockId = "1";
+
   chart: any;
 
   canvas: HTMLCanvasElement = document.createElement('canvas');
@@ -21,7 +25,7 @@ export class ChartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.chartStock("Apple", "#0E197D", "1");
+    this.chartStock(this.stockName, this.stockColor, this.stockId);
   }
   
 
@@ -33,10 +37,8 @@ export class ChartComponent implements OnInit {
 
   chartStock(stockName: string, stockColor: string, id: string) {
     this.divClick();
-    console.log(id);
     this.getStockDataService.getData('/stocks/'+id).subscribe(
       response => {
-        console.log(response);
         this.chart = new Chart('myChart', {
           type: 'line',
           data: {
