@@ -36,4 +36,9 @@ export class SearchBarComponent implements OnInit{
     const searchvalue = value.toLocaleLowerCase();
     return this.stocks.filter(option => option.stock_name.toLocaleLowerCase().includes(searchvalue));
   }
+
+  changeRoute(route: string){
+    console.log(route);
+    window.location.href= '/predict/' + route;
+  }
 }

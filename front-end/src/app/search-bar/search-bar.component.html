@@ -7,7 +7,7 @@
       <mat-form-field class="example-full-width" appearance="fill">
           <input class="input-no-underline search-bar" matInput [matAutocomplete]="auto" [formControl]="formcontrol" placeholder="Search" />
           <mat-autocomplete #auto>
-              <mat-option routerLink="predict/{{item.stock_id}}" *ngFor="let item of filteroptions | async">
+              <mat-option (click)="changeRoute(item.stock_id)" *ngFor="let item of filteroptions | async">
                 {{item.stock_name}}
               </mat-option>
           </mat-autocomplete>
