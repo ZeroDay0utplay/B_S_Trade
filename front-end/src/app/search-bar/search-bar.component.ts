@@ -17,16 +17,17 @@ export class SearchBarComponent implements OnInit{
   filteroptions!: Observable<Stock[]>
   formcontrol = new FormControl('');
 
-  constructor(private getStockService: GetDataService){
+  constructor(
+    private getStockService: GetDataService
+  ){}
+
+  ngOnInit(){
     this.getStockService.getData('/stocks')
     .subscribe(
       stocks => {
         this.stocks = stocks;
       }
     )
-  }
-
-  ngOnInit(){
     this.filteroptions = this.formcontrol.valueChanges.pipe(
       startWith(''), map(value => this._LISTFILTER(value || ''))
     )
