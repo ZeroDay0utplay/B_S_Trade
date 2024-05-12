@@ -51,6 +51,14 @@ export class ChartComponent implements OnInit {
               borderColor: stockColor,
               pointHoverRadius: 5,
               pointHoverBackgroundColor: stockColor
+            },
+            {
+              data: [],
+              borderWidth: 1,
+              pointRadius: 0,
+              borderColor: 'red',
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: 'red'
             }
             ],
           },

@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GetStockDataService } from '../services/get-stock-data.service';
 import { GetDataService } from '../services/get-data.service';
-import { Chart } from 'chart.js';
+import { ChartComponent } from '../chart/chart.component';
 
 @Component({
   selector: 'app-predict',
@@ -10,10 +10,9 @@ import { Chart } from 'chart.js';
   styleUrls: ['./predict.component.scss']
 })
 
-export class PredictComponent implements OnInit {
+export class PredictComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('myChart') chartCanvas: any;
-  chart: any;
+  @ViewChild(ChartComponent) chartComponent: any;
 
   constructor(
     private getStockService: GetStockDataService,
@@ -24,27 +23,35 @@ export class PredictComponent implements OnInit {
   user_id: any;
   logedIn: any;
 
+  newData: any;
+
   stockId: string = this.activeRoute.snapshot.paramMap.get("stock_id")!;
   stockColor: string = "#FFDB01";
   stokcName: string = "Gold";
 
-  addData(label: any, newData: any, chart: any) {
+  addData(labels: any, newData: any, chart: any) {
     // Add new label
-    chart.data.labels.push(label);
-
+    for (let label of labels)
+      chart.data.labels.push(label);
+    // chart.data.labels = labels;
     // Add new data
-    chart.data.datasets.forEach((dataset: any) => {
-      dataset.data.push(newData);
-    });
-
+    let data = [];
+    for (let i = 0; i < newData.length; i++) {
+      data.push({ x: labels[i], y: newData[i] })
+    }
+    chart.data.datasets[1].data = data;
     // Update the chart
     chart.update();
   }
 
+  ngAfterViewInit(): void {
+    console.log(this.chartComponent);
+  }
+
 
   ngOnInit(): void {
-    if (this.stockId == "1"){
-      this.stockColor  = "#0E197D";
+    if (this.stockId == "1") {
+      this.stockColor = "#0E197D";
       this.stokcName = "Apple";
     }
 
@@ -74,9 +81,7 @@ export class PredictComponent implements OnInit {
         res => {
           const labels = res.labels;
           const predictions = res.predictions;
-          console.log(predictions);
-          console.log(labels);
-
+          this.addData(labels, predictions, this.chartComponent.chart);
         },
         err => {
           console.log(err);
