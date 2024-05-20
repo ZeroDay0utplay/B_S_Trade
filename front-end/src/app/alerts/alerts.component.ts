@@ -17,6 +17,10 @@ export class AlertsComponent {
   constructor() {}
 
   changeRoute(){
-    location.href = `${this.nextRoute}`;
+    let next_route = "";
+    for (let route of this.nextRoute){
+      next_route+=route;
+    }
+    location.href = next_route;
   }
 }

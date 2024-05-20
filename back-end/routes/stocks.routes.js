@@ -10,8 +10,8 @@ const router = express.Router();
 const stocksRoute = (app) => {
     router.delete('/stocks/unstar_stock/:stock_id', authorization, unStartIt);
     router.post('/stocks/star_stock/:stock_id', authorization, startIt);
-    router.get("/stocks", authorization, getStockNames);
-    router.get("/predict/:stock_id", authorization, predict);
+    router.get("/stocks", getStockNames);
+    router.get("/predict/:stock_id", predict);
     app.use(router);
 }
 

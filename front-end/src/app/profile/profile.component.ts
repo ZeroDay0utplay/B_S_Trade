@@ -17,10 +17,9 @@ export class ProfileComponent implements OnInit {
 
   updateForm = new FormGroup({
     full_name: new FormControl(''),
-    email: new FormControl('', [Validators.required, new EmailValidatorService().emailValidator()]),
+    email: new FormControl(''),
     job: new FormControl(''),
-    bio: new FormControl(''),
-    // password: new FormControl(''),
+    bio: new FormControl('')
   });
 
   @ViewChild('avatarImg', { static: true }) avatarImgElement: ElementRef | undefined;

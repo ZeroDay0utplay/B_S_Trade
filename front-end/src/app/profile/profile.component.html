@@ -25,24 +25,27 @@
 
 <h1 class="welcome">Welcome, {{ username }}</h1>
 
-<app-alerts 
+
+
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
+
+  <app-alerts 
         [alert_danger]="alert_danger"
         [alert_success]="alert_success"
         [alert_warning]="alert_warning"
         [alert_message_danger]="alert_message_danger"
         [alert_message_success]="alert_message_success"
         [alert_message_warning]="alert_message_warning"
-        [nextRoute]="'/profile/{{id}}'"
+        [nextRoute]="['/profile/', id]"
     >
-</app-alerts>
+  </app-alerts>
 
-
-<form [formGroup]="updateForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center;">
   <h2 style="color: #C8AF1D; margin-left: -100px;">
     <img src="../../assets/images/star.png" class="label-icon">
     Change Full Name
   </h2>
-  <mat-form-field appearance="outline">
+  <mat-form-field>
     <mat-label>New Full Name</mat-label>
     <input matInput formControlName="full_name">
   </mat-form-field>
@@ -51,7 +54,7 @@
     <img src="../../assets/images/star.png" class="label-icon">
     Change E-mail
   </h2>
-  <mat-form-field appearance="outline">
+  <mat-form-field>
       <mat-label>Reset Email</mat-label>
       <input matInput formControlName="email">
   </mat-form-field>
@@ -60,7 +63,7 @@
     <img src="../../assets/images/star.png" class="label-icon">
     Change Job
   </h2>
-  <mat-form-field appearance="outline">
+  <mat-form-field>
       <mat-label>Change Job</mat-label>
       <input matInput formControlName="job">
   </mat-form-field>
@@ -69,7 +72,7 @@
     <img src="../../assets/images/star.png" class="label-icon">
     Add Bio
   </h2>
-  <mat-form-field appearance="outline" style="height: 150px;">
+  <mat-form-field style="height: 150px;">
     <mat-label>Tell us about yourself</mat-label>
     <input matInput formControlName="bio">
   </mat-form-field>
